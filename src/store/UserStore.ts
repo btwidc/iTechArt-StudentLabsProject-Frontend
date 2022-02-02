@@ -59,7 +59,7 @@ export default class UserStore {
   async checkAuth() {
     try {
       const response = await axios.get<AuthResponse>(
-        `${process.env.REACT_APP_API_URL}/refresh`,
+        `${process.env.REACT_APP_API_URL}refresh`,
         { withCredentials: true }
       );
       console.log(response);
