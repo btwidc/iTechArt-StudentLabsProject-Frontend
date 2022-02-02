@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { publicRoutes } from "./routes";
 import { Context } from "../index";
+import { MAIN_ROUTE } from "../utils/routesPath";
 
 const AppRouter = () => {
   const { userStore } = useContext(Context);
@@ -11,6 +12,10 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} />
       ))}
+      {userStore.isAuth && console.log(userStore)}
+      {userStore.isAuth && (
+        <Route path="*" element={<Navigate to={MAIN_ROUTE} />} />
+      )}
     </Routes>
   );
 };
