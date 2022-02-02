@@ -13,7 +13,7 @@ export const Context = createContext<UStore>({
 
 ReactDOM.render(
   <Context.Provider value={{ userStore }}>
-    <App />,
+    <App />
   </Context.Provider>,
   document.getElementById("root")
 );
