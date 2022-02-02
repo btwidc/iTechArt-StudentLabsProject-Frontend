@@ -10,7 +10,7 @@ const App = () => {
     if (localStorage.getItem("token")) {
       userStore.checkAuth();
     }
-  }, []);
+  }, [userStore]);
 
   return (
     <BrowserRouter>
