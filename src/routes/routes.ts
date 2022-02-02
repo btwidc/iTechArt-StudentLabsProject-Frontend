@@ -3,15 +3,15 @@ import MainPage from "../components/pages/MainPage/MainPage";
 import {
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
-  ALL_ROUTES,
+  //ALL_ROUTES,
   MAIN_ROUTE,
 } from "../utils/routesPath";
 
 export const publicRoutes = [
-  {
-    path: ALL_ROUTES,
-    Component: Auth,
-  },
+  // {
+  //   path: ALL_ROUTES,
+  //   Component: Auth,
+  // },
   {
     path: LOGIN_ROUTE,
     Component: Auth,
