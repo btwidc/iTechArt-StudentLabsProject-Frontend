@@ -93,6 +93,7 @@ const Auth = () => {
                   className="auth-form-login-button"
                   onClick={() => {
                     userStore.login(email, password);
+                    console.log(userStore);
                     navigate(MAIN_ROUTE);
                   }}
                 >

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { authRoutes, publicRoutes } from "./routes";
 import { Context } from "../index";
 import Auth from "../components/pages/AuthPage/Auth";
+import MainPage from "../components/pages/MainPage/MainPage";
 
 const AppRouter = () => {
   const { userStore } = useContext(Context);
@@ -15,7 +16,11 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} />
       ))}
-      {!userStore.isAuth && <Route path="*" element={<Auth />} />}
+      {userStore.isAuth ? (
+        <Route path="*" element={<MainPage />} />
+      ) : (
+        <Route path="*" element={<Auth />} />
+      )}
     </Routes>
   );
 };
