@@ -9,12 +9,12 @@ const AppRouter = () => {
   console.log(userStore);
   return (
     <Routes>
-      {publicRoutes.map(({ path, Component }) => (
-        <Route key={path} path={path} element={<Component />} />
-      ))}
       {userStore.isAuth && (
         <Route path="*" element={<Navigate to={MAIN_ROUTE} />} />
       )}
+      {publicRoutes.map(({ path, Component }) => (
+        <Route key={path} path={path} element={<Component />} />
+      ))}
     </Routes>
   );
 };
