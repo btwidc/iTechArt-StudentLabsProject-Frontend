@@ -14,6 +14,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      {userStore.isAuth && console.log(userStore)}
       <AppRouter />
     </BrowserRouter>
   );
