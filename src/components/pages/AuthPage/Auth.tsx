@@ -1,16 +1,27 @@
-import React from "react";
-import "../css-modules/Auth.css";
+import React, { useContext, useState } from "react";
+import "./Auth.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/routesPath";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../../utils/routesPath";
+//import { observer } from "mobx-react-lite";
+import { Context } from "../../../index";
 
 const Auth = () => {
+  const { userStore } = useContext(Context);
   const location = useLocation();
   const isRegistration = location.pathname === REGISTRATION_ROUTE;
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   return (
     <div className="limiter">
       <div className="auth-form-container">
         <div className="auth-form">
-          <form className="auth-form-content">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            className="auth-form-content"
+          >
             <span className="auth-form-title">
               {isRegistration ? "Registration" : "Login"}
             </span>
@@ -21,6 +32,8 @@ const Auth = () => {
                 type="text"
                 name="email"
                 placeholder="Type your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="auth-form-item">
@@ -30,6 +43,8 @@ const Auth = () => {
                 type="password"
                 name="password"
                 placeholder="Type your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             {isRegistration && (
@@ -61,9 +76,21 @@ const Auth = () => {
               )}
             </div>
             <div className="auth-form-button-field">
-              <button className="auth-form-login-button">
-                {isRegistration ? "Register" : "Sign in"}
-              </button>
+              {isRegistration ? (
+                <button
+                  className="auth-form-login-button"
+                  onClick={() => userStore.registration(email, password)}
+                >
+                  Register
+                </button>
+              ) : (
+                <button
+                  className="auth-form-login-button"
+                  onClick={() => userStore.login(email, password)}
+                >
+                  Sign in
+                </button>
+              )}
             </div>
           </form>
         </div>
