@@ -17,6 +17,10 @@ const Auth = () => {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
+  if (!userStore.isAuth) {
+    return <Auth />;
+  }
+
   return (
     <div className="limiter">
       <div className="auth-form-container">
@@ -94,9 +98,7 @@ const Auth = () => {
                   onClick={() => {
                     userStore.login(email, password);
                     console.log(userStore);
-                    userStore.isAuth
-                      ? navigate(MAIN_ROUTE)
-                      : navigate(LOGIN_ROUTE);
+                    navigate(MAIN_ROUTE);
                   }}
                 >
                   Sign in
