@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import "./Auth.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../../utils/routesPath";
-//import { observer } from "mobx-react-lite";
 import { Context } from "../../../index";
+import { observer } from "mobx-react-lite";
 
 const Auth = () => {
   const { userStore } = useContext(Context);
@@ -99,4 +99,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default observer(Auth);
