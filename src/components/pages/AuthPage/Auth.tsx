@@ -1,7 +1,11 @@
 import React, { useContext, useState } from "react";
 import "./Auth.css";
-import { NavLink, useLocation } from "react-router-dom";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../../utils/routesPath";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  LOGIN_ROUTE,
+  MAIN_ROUTE,
+  REGISTRATION_ROUTE,
+} from "../../../utils/routesPath";
 import { Context } from "../../../index";
 import { observer } from "mobx-react-lite";
 
@@ -11,6 +15,7 @@ const Auth = () => {
   const isRegistration = location.pathname === REGISTRATION_ROUTE;
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
   return (
     <div className="limiter">
@@ -86,7 +91,10 @@ const Auth = () => {
               ) : (
                 <button
                   className="auth-form-login-button"
-                  onClick={() => userStore.login(email, password)}
+                  onClick={() => {
+                    userStore.login(email, password);
+                    navigate(MAIN_ROUTE);
+                  }}
                 >
                   Sign in
                 </button>

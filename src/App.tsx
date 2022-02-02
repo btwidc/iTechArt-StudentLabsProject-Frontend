@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 
 const App = () => {
   const { userStore } = useContext(Context);
+  console.log(userStore);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       userStore.checkAuth();
@@ -14,7 +15,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {/*{userStore.isAuth && console.log(userStore)}*/}
       <AppRouter />
     </BrowserRouter>
   );
