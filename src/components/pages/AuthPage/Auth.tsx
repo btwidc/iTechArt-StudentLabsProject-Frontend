@@ -94,7 +94,9 @@ const Auth = () => {
                   onClick={() => {
                     userStore.login(email, password);
                     console.log(userStore);
-                    navigate(MAIN_ROUTE);
+                    userStore.isAuth
+                      ? navigate(MAIN_ROUTE)
+                      : navigate(LOGIN_ROUTE);
                   }}
                 >
                   Sign in
