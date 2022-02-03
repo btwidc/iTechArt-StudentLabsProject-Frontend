@@ -17,10 +17,6 @@ const Auth = () => {
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
-  if (!userStore.isAuth) {
-    return <Auth />;
-  }
-
   return (
     <div className="limiter">
       <div className="auth-form-container">
