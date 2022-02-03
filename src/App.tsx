@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routes/AppRouter";
-import { Context } from "./index";
+// import { Context } from "./index";
 import { observer } from "mobx-react-lite";
 
 const App = () => {
