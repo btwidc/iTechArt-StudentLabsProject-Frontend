@@ -6,12 +6,12 @@ import { observer } from "mobx-react-lite";
 
 const App = () => {
   const { userStore } = useContext(Context);
-  console.log(userStore);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      userStore.checkAuth();
+      // userStore.refresh();
     }
-  }, [userStore]);
+  }, []);
 
   return (
     <BrowserRouter>
