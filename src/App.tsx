@@ -5,7 +5,7 @@ import { Context } from "./index";
 import { observer } from "mobx-react-lite";
 
 const App = () => {
-  const { userStore } = useContext(Context);
+  // const { userStore } = useContext(Context);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
