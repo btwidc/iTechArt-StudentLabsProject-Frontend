@@ -22,7 +22,7 @@ export default class UserStore {
     try {
       const response = await AuthService.login(email, password);
       console.log(response);
-      localStorage.setItem("accessToken", response.data.accessToken);
+      // localStorage.setItem("accessToken", response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -33,7 +33,7 @@ export default class UserStore {
   async registration(email: string, password: string) {
     try {
       const response = await AuthService.registration(email, password);
-      localStorage.setItem("accessToken", response.data.accessToken);
+      // localStorage.setItem("accessToken", response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e: any) {
@@ -41,21 +41,10 @@ export default class UserStore {
     }
   }
 
-  // async logout() {
-  //   try {
-  //     const response = await AuthService.logout();
-  //     localStorage.removeItem("accessToken");
-  //     this.setAuth(false);
-  //     this.setUser({} as IUser);
-  //   } catch (e: any) {
-  //     console.log(e.response?.data?.message);
-  //   }
-  // }
-
   // async refresh() {
   //   try {
   //     const response = await AuthService.refresh();
-  //     localStorage.setItem("accessToken", response.data.accessToken);
+  //     // localStorage.setItem("accessToken", response.data.accessToken);
   //     this.setAuth(true);
   //     this.setUser(response.data.user);
   //   } catch (e: any) {

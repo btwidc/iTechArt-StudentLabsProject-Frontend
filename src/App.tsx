@@ -1,18 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routes/AppRouter";
-// import { Context } from "./index";
+import { Context } from "./index";
 import { observer } from "mobx-react-lite";
+import AuthService from "./services/AuthService";
 
 const App = () => {
-  // const { userStore } = useContext(Context);
+  const { userStore } = useContext(Context);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      // userStore.refresh();
-    }
+    setTimeout(() => {
+      AuthService.refresh()
+        .then((data) => {
+          userStore.setAuth(true);
+        })
+        .finally(() => setLoading(false));
+    }, 1000);
   }, []);
 
+  if (loading) {
+    setTimeout(() => {}, 500);
+  }
   return (
     <BrowserRouter>
       <AppRouter />

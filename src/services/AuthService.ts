@@ -1,33 +1,36 @@
 import { $host, $authHost } from "../http";
 import { AxiosResponse } from "axios";
 import { AuthResponse } from "../models/response/AuthResponse";
+import jwtDecode from "jwt-decode";
 
 export default class AuthService {
   static async login(
     email: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return await $host.post<AuthResponse>("/api/user/login", {
+    const { data } = await $host.post<AuthResponse>("/api/user/login", {
       email,
       password,
     });
+    localStorage.setItem("accessToken", data.accessToken);
+    return jwtDecode(data.accessToken);
   }
 
   static async registration(
     email: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return await $host.post<AuthResponse>("/api/user/registration", {
+    const { data } = await $host.post<AuthResponse>("/api/user/registration", {
       email,
       password,
     });
+    localStorage.setItem("accessToken", data.accessToken);
+    return jwtDecode(data.accessToken);
   }
 
-  // static async logout(): Promise<void> {
-  //   return await $authHost.post("/api/user/logout");
-  // }
-
   static async refresh() {
-    return await $authHost.get("/api/user/refresh");
+    const { data } = await $authHost.get("/api/user/refresh");
+    localStorage.setItem("accessToken", data.accessToken);
+    return jwtDecode(data.accessToken);
   }
 }
