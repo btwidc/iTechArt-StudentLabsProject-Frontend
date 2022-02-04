@@ -17,7 +17,7 @@ const App = () => {
         })
         .finally(() => setLoading(false));
     }, 1000);
-  }, []);
+  }, [userStore]);
 
   if (loading) {
     setTimeout(() => {}, 500);
