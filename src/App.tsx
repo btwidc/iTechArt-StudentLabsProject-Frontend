@@ -14,7 +14,7 @@ const App = () => {
     if (localStorage.getItem("refreshToken")) {
       dispatch(checkAuthAction());
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
