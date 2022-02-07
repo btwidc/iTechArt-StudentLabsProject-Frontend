@@ -1,19 +1,12 @@
-import React, { createContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import UserStore from "./store/UserStore";
-
-interface UStore {
-  userStore: UserStore;
-}
-const userStore = new UserStore();
-export const Context = createContext<UStore>({
-  userStore,
-});
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 ReactDOM.render(
-  <Context.Provider value={{ userStore }}>
+  <Provider store={store}>
     <App />
-  </Context.Provider>,
+  </Provider>,
   document.getElementById("root")
 );

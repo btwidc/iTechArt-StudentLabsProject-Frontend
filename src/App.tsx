@@ -1,27 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./routes/AppRouter";
-import { Context } from "./index";
-import { observer } from "mobx-react-lite";
-import AuthService from "./services/AuthService";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+import { checkAuthAction } from "./store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const App = () => {
-  const { userStore } = useContext(Context);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const state = useTypedSelector((state) => state);
+  console.log(state);
 
   useEffect(() => {
-    setTimeout(() => {
-      AuthService.refresh()
-        .then((data) => {
-          userStore.setAuth(true);
-        })
-        .finally(() => setLoading(false));
-    }, 1000);
-  }, [userStore]);
+    if (localStorage.getItem("refreshToken")) {
+      dispatch(checkAuthAction());
+    }
+  }, []);
 
-  if (loading) {
-    setTimeout(() => {}, 500);
-  }
   return (
     <BrowserRouter>
       <AppRouter />
@@ -29,4 +23,4 @@ const App = () => {
   );
 };
 
-export default observer(App);
+export default App;

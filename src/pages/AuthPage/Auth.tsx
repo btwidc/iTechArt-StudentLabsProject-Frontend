@@ -1,32 +1,46 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../utils/routesPath";
+import { useDispatch } from "react-redux";
 import {
-  LOGIN_ROUTE,
-  MAIN_ROUTE,
-  REGISTRATION_ROUTE,
-} from "../../../utils/routesPath";
-import { Context } from "../../../index";
-import { observer } from "mobx-react-lite";
+  loginAuthAction,
+  registerAuthAction,
+} from "../../store/actions/userActions";
 
 const Auth = () => {
-  const { userStore } = useContext(Context);
-  const location = useLocation();
-  const isRegistration = location.pathname === REGISTRATION_ROUTE;
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isRegistration = location.pathname === REGISTRATION_ROUTE;
+
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: any) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    dispatch(loginAuthAction(formState, navigate));
+    setFormState({ email: "", password: "" });
+  };
+
+  const handleRegister = async (e: any) => {
+    e.preventDefault();
+    dispatch(registerAuthAction(formState, navigate));
+    setFormState({ email: "", password: "" });
+  };
 
   return (
     <div className="limiter">
-      <div className="auth-form-container">
+      <div className={`${formState} auth-form-container`}>
         <div className="auth-form">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-            className="auth-form-content"
-          >
+          <form className="auth-form-content">
             <span className="auth-form-title">
               {isRegistration ? "Registration" : "Login"}
             </span>
@@ -37,8 +51,8 @@ const Auth = () => {
                 type="text"
                 name="email"
                 placeholder="Type your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formState.email}
+                onChange={(e) => handleChange(e)}
               />
             </div>
             <div className="auth-form-item">
@@ -48,21 +62,10 @@ const Auth = () => {
                 type="password"
                 name="password"
                 placeholder="Type your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formState.password}
+                onChange={(e) => handleChange(e)}
               />
             </div>
-            {isRegistration && (
-              <div className="auth-form-item">
-                <span className="auth-form-item-title">Confirm Password</span>
-                <input
-                  className="auth-form-item-field"
-                  type="password"
-                  name="passwordConfirm"
-                  placeholder="Confirm your password"
-                />
-              </div>
-            )}
             <div className="auth-form-link-field">
               {isRegistration ? (
                 <NavLink
@@ -84,18 +87,18 @@ const Auth = () => {
               {isRegistration ? (
                 <button
                   className="auth-form-login-button"
-                  onClick={() => userStore.registration(email, password)}
+                  name="Register"
+                  type="submit"
+                  onClick={(e) => handleRegister(e)}
                 >
                   Register
                 </button>
               ) : (
                 <button
                   className="auth-form-login-button"
-                  onClick={() => {
-                    userStore.login(email, password);
-                    console.log(userStore);
-                    navigate(MAIN_ROUTE);
-                  }}
+                  name="Login"
+                  type="submit"
+                  onClick={(e) => handleLogin(e)}
                 >
                   Sign in
                 </button>
@@ -108,4 +111,4 @@ const Auth = () => {
   );
 };
 
-export default observer(Auth);
+export default Auth;

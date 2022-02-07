@@ -1,5 +1,5 @@
-import Auth from "../components/pages/AuthPage/Auth";
-import MainPage from "../components/pages/MainPage/MainPage";
+import Auth from "../pages/AuthPage/Auth";
+import MainPage from "../pages/MainPage/MainPage";
 import {
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,

@@ -1,29 +1,25 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { authRoutes, publicRoutes } from "./routes";
-import { Context } from "../index";
-import Auth from "../components/pages/AuthPage/Auth";
-import MainPage from "../components/pages/MainPage/MainPage";
-import { observer } from "mobx-react-lite";
+import Auth from "../pages/AuthPage/Auth";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import MainPage from "../pages/MainPage/MainPage";
 
 const AppRouter = () => {
-  const { userStore } = useContext(Context);
+  const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
   return (
     <Routes>
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} />
       ))}
-      {userStore.isAuth &&
+      {isLoggedIn &&
         authRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} />
         ))}
-      {userStore.isAuth ? (
-        <Route path="*" element={<MainPage />} />
-      ) : (
-        <Route path="*" element={<Auth />} />
-      )}
+      {/*<Route path="*" element={<MainPage />*/}
+      <Route path="*" element={<Auth />} />
     </Routes>
   );
 };
 
-export default observer(AppRouter);
+export default AppRouter;
