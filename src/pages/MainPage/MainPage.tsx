@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import {
-  checkAuthAction,
-  logoutAuthAction,
-} from "../../store/actions/userActions";
+import { logoutAuthAction } from "../../store/actions/userActions";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import api from "../../http";
@@ -17,12 +14,6 @@ const MainPage = () => {
     const response = await api.test();
     console.log(response.data);
   };
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("refreshToken")) {
-  //     dispatch(checkAuthAction());
-  //   }
-  // }, []);
 
   const handleLogout = async (e: any) => {
     e.preventDefault();
