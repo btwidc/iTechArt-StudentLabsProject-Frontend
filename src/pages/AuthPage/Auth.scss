@@ -4,13 +4,27 @@
     box-sizing: border-box;
 }
 
+
+// Backgrounds
+$page-background:  url(../../images/bg.jpg) center/cover no-repeat;
+$auth-form-button-background: lightsalmon;
+
+// Fonts
+$auth-form-font-family: Poppins;
+
+//Colors
+$auth-form-title-color: #333333;
+$auth-form-register-link-color: #666666;
+$auth-form-register-link-hover-color: lightsalmon;
+
+
 .limiter {
     width: 100%;
     margin: 0 auto;
 }
 
 .auth-form-container {
-    background-image: url(../../images/bg.jpg);
+    background: $page-background;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -18,9 +32,6 @@
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
 }
 
 .auth-form {
@@ -30,6 +41,7 @@
     border-radius: 10px;
     overflow: hidden;
     padding: 40px 60px;
+    position: relative;
 }
 
 .auth-form-content {
@@ -38,10 +50,10 @@
 
 .auth-form-title {
     display: block;
-    font-family: Poppins;
+    font-family: $auth-form-font-family;
     font-weight: 700;
     font-size: 38px;
-    color: #333333;
+    color: $auth-form-title-color;
     text-align: center;
     padding-bottom: 40px;
 }
@@ -52,18 +64,18 @@
 }
 
 .auth-form-item-title {
-    font-family: Poppins;
+    font-family: $auth-form-font-family;
     font-weight: 400;
     font-size: 14px;
-    color: #333333;
+    color: $auth-form-title-color;
     padding-left: 10px;
 }
 
 .auth-form-item-field {
-    font-family: Poppins;
+    font-family: $auth-form-font-family;
     font-weight: 500;
     font-size: 16px;
-    color: #333333;
+    color: $auth-form-title-color;
     display: block;
     width: 100%;
     border: none;
@@ -84,14 +96,14 @@
 
 .auth-form-registration-link {
     text-decoration: none;
-    font-family: Poppins;
+    font-family: $auth-form-font-family;
     font-weight: 300;
     font-size: 14px;
-    color: #666666;
+    color: $auth-form-register-link-color;
 }
 
 .auth-form-registration-link:hover {
-    color: lightsalmon;
+    color: $auth-form-register-link-hover-color;
 }
 
 .auth-form-button-field {
@@ -103,15 +115,15 @@
 }
 
 .auth-form-login-button {
-    background: lightsalmon;
+    background: $auth-form-button-background;
     opacity: 0.7;
     border: none;
     cursor: pointer;
     border-radius: 25px;
-    font-family: Poppins;
+    font-family: $auth-form-font-family;
     font-weight: 500;
     font-size: 16px;
-    color: #333333;
+    color: $auth-form-title-color;
     text-transform: uppercase;
     display: flex;
     justify-content: center;

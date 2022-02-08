@@ -7,6 +7,9 @@ import { LOGIN_ROUTE, MAIN_ROUTE } from "../../utils/routesPath";
 export const loginAuthAction = (formState: IUserAuth, navigate: any) => {
   return async (dispatch: Dispatch<UserAuthAction>) => {
     try {
+      dispatch({
+        type: UserActionTypes.LOGIN_ACTION,
+      });
       const response = await api.login(formState);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
@@ -26,6 +29,9 @@ export const loginAuthAction = (formState: IUserAuth, navigate: any) => {
 export const registerAuthAction = (formState: IUserAuth, navigate: any) => {
   return async (dispatch: Dispatch<UserAuthAction>) => {
     try {
+      dispatch({
+        type: UserActionTypes.REGISTER_ACTION,
+      });
       const response = await api.registration(formState);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
@@ -64,6 +70,10 @@ export const logoutAuthAction = (navigate: any) => {
 export const checkAuthAction = () => {
   return async (dispatch: Dispatch<UserAuthAction>) => {
     try {
+      dispatch({
+        type: UserActionTypes.REFRESH_ACTION,
+      });
+
       const refreshToken = localStorage.getItem("refreshToken");
       const response = await api.refresh(refreshToken);
       localStorage.setItem("accessToken", response.data.newAccessToken);

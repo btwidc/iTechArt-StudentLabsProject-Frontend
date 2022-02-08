@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Auth.css";
+import "./Auth.scss";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../utils/routesPath";
 import { useDispatch } from "react-redux";
@@ -7,11 +7,16 @@ import {
   loginAuthAction,
   registerAuthAction,
 } from "../../store/actions/userActions";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 
 const Auth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isLoading = useTypedSelector((state) => state.user.loading);
+  const isRefreshing = useTypedSelector((state) => state.user.isRefreshing);
 
   const isRegistration = location.pathname === REGISTRATION_ROUTE;
 
@@ -21,7 +26,7 @@ const Auth = () => {
   });
 
   const handleChange = (e: any) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+    setFormState({ ...formState, [e.target.id]: e.target.value });
   };
 
   const handleLogin = async (e: any) => {
@@ -38,29 +43,37 @@ const Auth = () => {
 
   return (
     <div className="limiter">
-      <div className={`${formState} auth-form-container`}>
+      <div
+        className="auth-form-container"
+        style={{ opacity: isLoading ? 0.7 : 1 }}
+      >
         <div className="auth-form">
           <form className="auth-form-content">
+            {isLoading && !isRefreshing && <LoadingAnimation />}
             <span className="auth-form-title">
               {isRegistration ? "Registration" : "Login"}
             </span>
             <div className="auth-form-item">
-              <span className="auth-form-item-title">E-mail</span>
+              <label htmlFor="email" className="auth-form-item-title">
+                E-mail
+              </label>
               <input
                 className="auth-form-item-field"
                 type="text"
-                name="email"
+                id="email"
                 placeholder="Type your email"
                 value={formState.email}
                 onChange={(e) => handleChange(e)}
               />
             </div>
             <div className="auth-form-item">
-              <span className="auth-form-item-title">Password</span>
+              <label htmlFor="password" className="auth-form-item-title">
+                Password
+              </label>
               <input
                 className="auth-form-item-field"
                 type="password"
-                name="password"
+                id="password"
                 placeholder="Type your password"
                 value={formState.password}
                 onChange={(e) => handleChange(e)}

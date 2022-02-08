@@ -36,29 +36,26 @@ $host.interceptors.request.use((config: any) => {
   return config;
 });
 
+let isRetry = false;
 $host.interceptors.response.use(
   (config) => {
     return config;
   },
   async (error) => {
     const originalRequest = error.config;
-    if (
-      error.response.status === 401 &&
-      error.config &&
-      !error.config._isRetry
-    ) {
-      originalRequest._isRetry = true;
+    if (error.response.status === 401 && !isRetry) {
+      isRetry = true;
       try {
         const refreshToken = localStorage.getItem("refreshToken");
         const response = await api.refresh(refreshToken);
-        console.log(response);
+        console.log(response.data);
         localStorage.setItem("accessToken", response.data.newAccessToken);
         return $host.request(originalRequest);
       } catch (e) {
-        console.log("Auth not");
+        console.log("Not auth");
       }
-      throw error;
     }
+    return Promise.reject(error);
   }
 );
 

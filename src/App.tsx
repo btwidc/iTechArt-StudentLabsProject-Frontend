@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
+
   const state = useTypedSelector((state) => state);
   console.log(state);
 
