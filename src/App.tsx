@@ -12,7 +12,7 @@ const App = () => {
     if (refreshToken) {
       dispatch(checkAuthAction());
     }
-  }, [dispatch]);
+  }, [dispatch, refreshToken]);
 
   return (
     <BrowserRouter>
