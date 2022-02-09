@@ -1,8 +1,11 @@
-import { UserAuthAction, UserActionTypes } from "../../pages/types/User";
+import {
+  UserAuthAction,
+  UserActionTypes,
+} from "../../types/userActionsTypes/userActionsTypes";
 import { Dispatch } from "redux";
-import { IUserAuth } from "../../models/request/IUserAuth";
-import api from "../../http";
+import { IUserAuth } from "../../types/authTypes/requests/IUserAuth";
 import { LOGIN_ROUTE, MAIN_ROUTE } from "../../utils/routesPath";
+import AuthService from "../../services/AuthService";
 
 export const loginAuthAction = (formState: IUserAuth, navigate: any) => {
   return async (dispatch: Dispatch<UserAuthAction>) => {
@@ -10,7 +13,7 @@ export const loginAuthAction = (formState: IUserAuth, navigate: any) => {
       dispatch({
         type: UserActionTypes.LOGIN_ACTION,
       });
-      const response = await api.login(formState);
+      const response = await AuthService.login(formState);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
       dispatch({
@@ -32,7 +35,7 @@ export const registerAuthAction = (formState: IUserAuth, navigate: any) => {
       dispatch({
         type: UserActionTypes.REGISTER_ACTION,
       });
-      const response = await api.registration(formState);
+      const response = await AuthService.registration(formState);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("refreshToken", response.data.refreshToken);
       dispatch({
@@ -54,7 +57,7 @@ export const logoutAuthAction = (navigate: any) => {
       const refreshToken = localStorage.getItem("refreshToken");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      if (refreshToken) await api.logout(refreshToken);
+      if (refreshToken) await AuthService.logout(refreshToken);
       dispatch({
         type: UserActionTypes.LOGOUT_SUCCESS,
       });
@@ -75,7 +78,7 @@ export const checkAuthAction = () => {
       });
 
       const refreshToken = localStorage.getItem("refreshToken");
-      const response = await api.refresh(refreshToken);
+      const response = await AuthService.refresh(refreshToken);
       localStorage.setItem("accessToken", response.data.newAccessToken);
       dispatch({
         type: UserActionTypes.REFRESH_SUCCESS,

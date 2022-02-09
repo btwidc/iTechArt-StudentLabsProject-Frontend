@@ -1,14 +1,15 @@
-import { IUser } from "../../models/request/IUser";
-import { AuthResponse } from "../../models/response/AuthResponse";
+import { IUser } from "../authTypes/requests/IUser";
+import { AuthResponse } from "../authTypes/responses/AuthResponse";
 
 export interface UserAuthState {
   isLoggedIn: boolean;
-  isRefreshing?: boolean;
   loading: boolean;
+  isRefreshing?: boolean;
   user?: IUser;
   accessToken?: string;
   refreshToken?: string;
-  message: string;
+  message?: string;
+  errorStatus?: number;
 }
 
 export enum UserActionTypes {

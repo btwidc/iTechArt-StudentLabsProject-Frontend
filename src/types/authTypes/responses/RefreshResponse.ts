@@ -1,4 +1,4 @@
-import { IUser } from "../request/IUser";
+import { IUser } from "../requests/IUser";
 
 export interface RefreshResponse {
   newAccessToken: string;

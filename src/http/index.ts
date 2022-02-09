@@ -1,35 +1,11 @@
-import axios, { AxiosResponse } from "axios";
-import { IUserAuth } from "../models/request/IUserAuth";
-import { AuthResponse } from "../models/response/AuthResponse";
-import { RefreshResponse } from "../models/response/RefreshResponse";
+import axios from "axios";
+import AuthService from "../services/AuthService";
 
-const $host = axios.create({
+const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-const api = {
-  login: (user: IUserAuth): Promise<AxiosResponse<AuthResponse>> => {
-    return $host.post<AuthResponse>("/user/login", user);
-  },
-  registration: (user: IUserAuth): Promise<AxiosResponse<AuthResponse>> => {
-    return $host.post<AuthResponse>("/user/registration", user);
-  },
-  logout: (refreshToken: string): Promise<void> => {
-    return $host.post("/user/logout", { refreshToken: refreshToken });
-  },
-  refresh: (
-    refreshToken: string | null
-  ): Promise<AxiosResponse<RefreshResponse>> => {
-    return $host.post<RefreshResponse>("/user/refresh", {
-      refreshToken: refreshToken,
-    });
-  },
-  test: () => {
-    return $host.get("/user/test");
-  },
-};
-
-$host.interceptors.request.use((config: any) => {
+api.interceptors.request.use((config: any) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem(
     "accessToken"
   )}`;
@@ -37,7 +13,7 @@ $host.interceptors.request.use((config: any) => {
 });
 
 let isRetry = false;
-$host.interceptors.response.use(
+api.interceptors.response.use(
   (config) => {
     return config;
   },
@@ -47,10 +23,10 @@ $host.interceptors.response.use(
       isRetry = true;
       try {
         const refreshToken = localStorage.getItem("refreshToken");
-        const response = await api.refresh(refreshToken);
+        const response = await AuthService.refresh(refreshToken);
         console.log(response.data);
         localStorage.setItem("accessToken", response.data.newAccessToken);
-        return $host.request(originalRequest);
+        return api.request(originalRequest);
       } catch (e) {
         console.log("Not auth");
       }

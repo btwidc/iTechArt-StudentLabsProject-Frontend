@@ -9,6 +9,7 @@ import {
 } from "../../store/actions/userActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
+import AuthInput from "../../components/AuthInput/AuthInput";
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -25,17 +26,17 @@ const Auth = () => {
     password: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormState({ ...formState, [e.target.id]: e.target.value });
   };
 
-  const handleLogin = async (e: any) => {
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(loginAuthAction(formState, navigate));
     setFormState({ email: "", password: "" });
   };
 
-  const handleRegister = async (e: any) => {
+  const handleRegister = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(registerAuthAction(formState, navigate));
     setFormState({ email: "", password: "" });
@@ -53,69 +54,43 @@ const Auth = () => {
             <span className="auth-form-title">
               {isRegistration ? "Registration" : "Login"}
             </span>
-            <div className="auth-form-item">
-              <label htmlFor="email" className="auth-form-item-title">
-                E-mail
-              </label>
-              <input
-                className="auth-form-item-field"
-                type="text"
-                id="email"
-                placeholder="Type your email"
-                value={formState.email}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-            <div className="auth-form-item">
-              <label htmlFor="password" className="auth-form-item-title">
-                Password
-              </label>
-              <input
-                className="auth-form-item-field"
-                type="password"
-                id="password"
-                placeholder="Type your password"
-                value={formState.password}
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
+            <AuthInput
+              htmlFor="email"
+              labelName="E-mail"
+              type="text"
+              id="email"
+              placeholder="Type your email"
+              value={formState.email}
+              onChange={handleChange}
+            />
+            <AuthInput
+              htmlFor="password"
+              labelName="Password"
+              type="password"
+              id="password"
+              placeholder="Type your password"
+              value={formState.password}
+              onChange={handleChange}
+            />
             <div className="auth-form-link-field">
-              {isRegistration ? (
-                <NavLink
-                  className="auth-form-registration-link"
-                  to={LOGIN_ROUTE}
-                >
-                  Already have an account? Sign in!
-                </NavLink>
-              ) : (
-                <NavLink
-                  className="auth-form-registration-link"
-                  to={REGISTRATION_ROUTE}
-                >
-                  Don't have an account? Register here!
-                </NavLink>
-              )}
+              <NavLink
+                className="auth-form-registration-link"
+                to={isRegistration ? LOGIN_ROUTE : REGISTRATION_ROUTE}
+              >
+                {isRegistration
+                  ? "Already have an account? Sign in!"
+                  : "Don't have an account? Register here!"}
+              </NavLink>
             </div>
             <div className="auth-form-button-field">
-              {isRegistration ? (
-                <button
-                  className="auth-form-login-button"
-                  name="Register"
-                  type="submit"
-                  onClick={(e) => handleRegister(e)}
-                >
-                  Register
-                </button>
-              ) : (
-                <button
-                  className="auth-form-login-button"
-                  name="Login"
-                  type="submit"
-                  onClick={(e) => handleLogin(e)}
-                >
-                  Sign in
-                </button>
-              )}
+              <button
+                className="auth-form-login-button"
+                name={isRegistration ? "Register" : "Login"}
+                type="submit"
+                onClick={isRegistration ? handleRegister : handleLogin}
+              >
+                {isRegistration ? "Register" : "Sign in"}
+              </button>
             </div>
           </form>
         </div>
