@@ -50,7 +50,7 @@ const Auth = () => {
       >
         <div className="auth-form">
           <form className="auth-form-content">
-            {isLoading && !isRefreshing && <LoadingAnimation />}
+            И
             <span className="auth-form-title">
               {isRegistration ? "Registration" : "Login"}
             </span>

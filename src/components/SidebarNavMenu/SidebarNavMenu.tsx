@@ -20,9 +20,38 @@ const SidebarNavMenu = () => {
   };
 
   return (
-    <nav className="sidebar-nav-menu">
-      <button onClick={handleLogout}>Logout</button>
-    </nav>
+    <div className="sidebar-nav-container">
+      <section className="sidebar-nav-menu-container">
+        <a className="sidebar-nav-logo" href="/">
+          <img
+            className="sidebar-nav-logo"
+            src={"/images/iTechArtLogo.png"}
+            alt="iTechArt logo"
+          />
+        </a>
+        <div className="sidebar-nav-menu">
+          <nav className="nav-menu">
+            <ul className="nav-list">
+              <li className="nav-item">
+                <a href="#">Profile</a>
+              </li>
+              <li className="nav-item">
+                <a href="#">Company</a>
+              </li>
+              <li className="nav-item">
+                <a href="#">Contacts</a>
+              </li>
+              <li className="divider" />
+              <li className="nav-item">
+                <a onClick={handleLogout} href="#">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+    </div>
   );
 };
 

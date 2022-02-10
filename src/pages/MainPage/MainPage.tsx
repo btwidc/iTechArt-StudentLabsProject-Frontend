@@ -4,7 +4,6 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { LOGIN_ROUTE } from "../../utils/routesPath";
 import SidebarNavMenu from "../../components/SidebarNavMenu/SidebarNavMenu";
 import Content from "../../components/Content/Content";
-import Footer from "../../components/Foooter/Footer";
 import "./MainPage.scss";
 
 const MainPage = () => {
@@ -19,7 +18,6 @@ const MainPage = () => {
     <div className="limiter">
       <SidebarNavMenu />
       <Content />
-      <Footer />
     </div>
   );
 };
