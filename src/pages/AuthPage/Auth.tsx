@@ -52,7 +52,6 @@ const Auth = () => {
               {isRegistration ? "Registration" : "Login"}
             </span>
             <AuthInput
-              htmlFor="email"
               labelName="E-mail"
               type="text"
               id="email"
@@ -61,7 +60,6 @@ const Auth = () => {
               onChange={handleChange}
             />
             <AuthInput
-              htmlFor="password"
               labelName="Password"
               type="password"
               id="password"

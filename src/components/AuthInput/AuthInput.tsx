@@ -4,7 +4,6 @@ import { InputProps } from "../../types/componentsPropsTypes/InputProps";
 
 const AuthInput = ({
   labelName,
-  htmlFor,
   type,
   id,
   placeholder,
@@ -13,9 +12,7 @@ const AuthInput = ({
 }: InputProps) => {
   return (
     <div className="auth-form-item">
-      <label htmlFor={htmlFor} className="auth-form-item-title">
-        {labelName}
-      </label>
+      <label className="auth-form-item-title">{labelName}</label>
       <input
         className="auth-form-item-field"
         type={type}
