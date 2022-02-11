@@ -33,17 +33,19 @@ const SidebarNavMenu = () => {
           <nav className="nav-menu">
             <ul className="nav-list">
               <li className="nav-item">
-                <a href="/main">Profile</a>
+                <a href="/">Profile</a>
               </li>
               <li className="nav-item">
-                <a href="/main">Company</a>
+                <a href="/">Company</a>
               </li>
               <li className="nav-item">
-                <a href="/main">Contacts</a>
+                <a href="/">Contacts</a>
               </li>
               <li className="divider" />
               <li className="nav-item">
-                <a onClick={handleLogout}>Logout</a>
+                <a onClick={handleLogout} href="/">
+                  Logout
+                </a>
               </li>
             </ul>
           </nav>
