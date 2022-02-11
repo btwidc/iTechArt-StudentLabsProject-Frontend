@@ -33,13 +33,13 @@ const SidebarNavMenu = () => {
           <nav className="nav-menu">
             <ul className="nav-list">
               <li className="nav-item">
-                <a href="#">Profile</a>
+                <a href="">Profile</a>
               </li>
               <li className="nav-item">
-                <a href="#">Company</a>
+                <a href="">Company</a>
               </li>
               <li className="nav-item">
-                <a href="#">Contacts</a>
+                <a href="">Contacts</a>
               </li>
               <li className="divider" />
               <li className="nav-item">

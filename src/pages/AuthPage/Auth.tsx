@@ -8,7 +8,6 @@ import {
   registerAuthAction,
 } from "../../store/actions/userActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 import AuthInput from "../../components/AuthInput/AuthInput";
 
 const Auth = () => {
@@ -17,7 +16,6 @@ const Auth = () => {
   const location = useLocation();
 
   const isLoading = useTypedSelector((state) => state.user.loading);
-  const isRefreshing = useTypedSelector((state) => state.user.isRefreshing);
 
   const isRegistration = location.pathname === REGISTRATION_ROUTE;
 
@@ -50,7 +48,6 @@ const Auth = () => {
       >
         <div className="auth-form">
           <form className="auth-form-content">
-            И
             <span className="auth-form-title">
               {isRegistration ? "Registration" : "Login"}
             </span>
