@@ -9,10 +9,42 @@
     z-index: 1;
 }
 
+@media screen and (max-width: 700px) {
+    .sidebar-nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        width: 100%;
+        min-height: 20%;
+        position: relative;
+        .sidebar-nav-menu-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 10px;
+        }
+    }
+    .sidebar-nav-menu {
+        display: none;
+    }
+    .sidebar-nav-drop-down {
+        display: flex;
+    }
+}
+
 .sidebar-nav-logo {
     width: 200px;
     min-height: 80px;
     position: relative;
+}
+
+.sidebar-nav-drop-down {
+    //display: none;
+    border: none;
+    background-color: inherit;
 }
 
 .sidebar-nav-logo {

@@ -17,11 +17,15 @@ const SidebarNavMenu = () => {
         <div className="sidebar-nav-container">
             <section className="sidebar-nav-menu-container">
                 <a className="sidebar-nav-logo" href="/">
-                    <img
-                        className="sidebar-nav-logo"
-                        src={'/images/iTechArtLogo.png'}
-                        alt="iTechArt logo"
-                    />
+                    <img src={'/images/iTechArtLogo.png'} alt="iTechArt logo" />
+                </a>
+                <a href="/">
+                    <button className="sidebar-nav-drop-down">
+                        <img
+                            src={'/images/dropDownIcon.png'}
+                            alt="Drop down icon"
+                        />
+                    </button>
                 </a>
                 <div className="sidebar-nav-menu">
                     <nav className="nav-menu">
