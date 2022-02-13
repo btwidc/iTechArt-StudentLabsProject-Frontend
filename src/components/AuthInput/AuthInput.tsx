@@ -1,6 +1,14 @@
 import React from 'react';
 import './AuthInput.scss';
-import { InputProps } from '../../types/componentsPropsTypes/InputProps';
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    labelName: string;
+    type: string;
+    id: string;
+    placeholder: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 const AuthInput = ({
     labelName,
