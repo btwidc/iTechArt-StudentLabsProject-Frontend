@@ -1,12 +1,22 @@
 import React from 'react';
-import './SidebarNavMenu.scss';
-import { logoutAuthAction } from '../../store/actions/userActions';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const SidebarNavMenu = () => {
+import { logoutAuthAction } from '../../store/actions/userActions';
+
+import './SidebarNavMenu.scss';
+import { sidebarRoutes } from '../../routes/sidebarRoutes';
+
+interface SidebarNavProps {
+    open: boolean;
+    setOpen: (open: boolean) => void;
+}
+
+const SidebarNavMenu = ({ open, setOpen }: SidebarNavProps) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const closeSidebar = () => setOpen(!open);
 
     const handleLogout = async (e: any) => {
         e.preventDefault();
@@ -14,41 +24,36 @@ const SidebarNavMenu = () => {
     };
 
     return (
-        <div className="sidebar-nav-container">
-            <section className="sidebar-nav-menu-container">
-                <a className="sidebar-nav-logo" href="/">
+        <div
+            className={
+                open ? 'sidebar-nav-container mobile' : 'sidebar-nav-container'
+            }>
+            <div className="sidebar-nav-menu-container">
+                <button className="sidebar-nav-cancel" onClick={closeSidebar}>
+                    <img src="/images/iconCancel.png" alt="Cancel icon" />
+                </button>
+                <Link className="sidebar-nav-logo" to="/">
                     <img src={'/images/iTechArtLogo.png'} alt="iTechArt logo" />
-                </a>
-                <a href="/">
-                    <button className="sidebar-nav-drop-down">
-                        <img
-                            src={'/images/dropDownIcon.png'}
-                            alt="Drop down icon"
-                        />
-                    </button>
-                </a>
+                </Link>
                 <div className="sidebar-nav-menu">
                     <nav className="nav-menu">
                         <ul className="nav-list">
+                            {sidebarRoutes.map((item, index) => {
+                                return (
+                                    <li key={index} className={item.className}>
+                                        <Link to={item.path}>{item.title}</Link>
+                                    </li>
+                                );
+                            })}
                             <li className="nav-item">
-                                <a href="/">Profile</a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="/">Company</a>
-                            </li>
-                            <li className="nav-item">
-                                <a href="/">Contacts</a>
-                            </li>
-                            <li className="divider" />
-                            <li className="nav-item">
-                                <a onClick={handleLogout} href="/">
+                                <Link to="#" onClick={handleLogout}>
                                     Logout
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>
                 </div>
-            </section>
+            </div>
         </div>
     );
 };
