@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#content-container {
+    position: absolute;
+    display: flex;
+    float: left;
+    width: 60%;
+    margin-left: 20%;
+    min-height: 100%;
+    border-left: 1.5px solid #e7e6e699;
+    border-right: 1.5px solid #e7e6e699;
+    background-color: #f1f1f199;
+}
+
+@media screen and (max-width: 1080px) {
+    #content-container {
+        width: 65%;
+        margin-left: 0;
+    }
+
+}
