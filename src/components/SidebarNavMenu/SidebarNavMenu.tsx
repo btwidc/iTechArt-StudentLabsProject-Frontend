@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logoutAuthAction } from '../../store/actions/userActions';
 
 import './SidebarNavMenu.scss';
-import { sidebarRoutes } from '../../routes/sidebarRoutes';
+import { sidebarNavItemsRoutes } from '../../routes/sidebarNavItemsRoutes';
 
 interface SidebarNavProps {
     open: boolean;
@@ -32,15 +32,21 @@ const SidebarNavMenu = ({ open, setOpen }: SidebarNavProps) => {
                 <button className="sidebar-nav-cancel" onClick={closeSidebar}>
                     <img src="/images/iconCancel.png" alt="Cancel icon" />
                 </button>
-                <Link className="sidebar-nav-logo" to="/">
+                <Link
+                    className="sidebar-nav-logo"
+                    to="/"
+                    onClick={closeSidebar}>
                     <img src={'/images/iTechArtLogo.png'} alt="iTechArt logo" />
                 </Link>
                 <div className="sidebar-nav-menu">
                     <nav className="nav-menu">
                         <ul className="nav-list">
-                            {sidebarRoutes.map((item, index) => {
+                            {sidebarNavItemsRoutes.map((item, index) => {
                                 return (
-                                    <li key={index} className={item.className}>
+                                    <li
+                                        key={index}
+                                        className={item.className}
+                                        onClick={closeSidebar}>
                                         <Link to={item.path}>{item.title}</Link>
                                     </li>
                                 );

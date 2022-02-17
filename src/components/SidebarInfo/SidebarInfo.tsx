@@ -1,24 +1,24 @@
 import React from 'react';
-import './Content.scss';
-import { contentRoutes } from '../../routes/routes';
+import './SidebarInfo.scss';
+import { sidebarInfoRoutes } from '../../routes/routes';
 import { Route, Routes } from 'react-router-dom';
-import PortalContent from '../../portalContent/PortalContent';
+import PortalSidebarInfo from '../../portalContent/PortalSidebarInfo';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-const Content = () => {
+const SidebarInfo = () => {
     const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
     return (
-        <div id="content-container">
+        <div id="sidebar-info-container">
             <Routes>
                 {isLoggedIn &&
-                    contentRoutes.map(({ path, Component }) => (
+                    sidebarInfoRoutes.map(({ path, Component }) => (
                         <Route
                             key={path}
                             path={path}
                             element={
-                                <PortalContent>
+                                <PortalSidebarInfo>
                                     <Component />
-                                </PortalContent>
+                                </PortalSidebarInfo>
                             }
                         />
                     ))}
@@ -27,4 +27,4 @@ const Content = () => {
     );
 };
 
-export default Content;
+export default SidebarInfo;

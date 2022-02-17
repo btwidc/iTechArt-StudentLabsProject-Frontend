@@ -1,17 +1,22 @@
-export const sidebarRoutes = [
+export const sidebarNavItemsRoutes = [
     {
         title: 'Profile',
-        path: '/',
+        path: '/profile',
         className: 'nav-item',
     },
     {
         title: 'Events',
-        path: '/',
+        path: '/events',
+        className: 'nav-item',
+    },
+    {
+        title: 'Notes',
+        path: '/notes',
         className: 'nav-item',
     },
     {
         title: 'Candidates',
-        path: '/',
+        path: '/candidates',
         className: 'nav-item',
     },
     {

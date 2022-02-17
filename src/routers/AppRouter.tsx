@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { authRoutes, publicRoutes } from './routes';
+import { authRoutes, publicRoutes } from '../routes/routes';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import Auth from '../pages/AuthPage/Auth';
 import MainPage from '../pages/MainPage/MainPage';

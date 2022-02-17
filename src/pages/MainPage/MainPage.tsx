@@ -6,6 +6,7 @@ import { LOGIN_ROUTE } from '../../utils/routesPath';
 import './MainPage.scss';
 import Content from '../../components/Content/Content';
 import SidebarNavMenu from '../../components/SidebarNavMenu/SidebarNavMenu';
+import SidebarInfo from '../../components/SidebarInfo/SidebarInfo';
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -30,6 +31,7 @@ const MainPage = () => {
             </div>
             <SidebarNavMenu open={sidebarOpen} setOpen={setSidebarOpen} />
             <Content />
+            <SidebarInfo />
         </div>
     );
 };
