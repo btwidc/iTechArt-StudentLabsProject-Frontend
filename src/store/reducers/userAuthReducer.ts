@@ -7,6 +7,7 @@ import {
 
 const initialUserState: UserAuthState = {
     isLoggedIn: false,
+    isRefreshing: false,
     loading: false,
     user: {} as IUser,
     accessToken: '',
@@ -99,6 +100,7 @@ export const userAuthReducer = (
             return {
                 ...state,
                 isLoggedIn: false,
+                isRefreshing: false,
                 loading: false,
                 message: 'Error during refresh',
             };
@@ -106,6 +108,7 @@ export const userAuthReducer = (
             return {
                 ...state,
                 isLoggedIn: true,
+                isRefreshing: false,
                 loading: false,
                 message: 'Successfully refreshed',
             };

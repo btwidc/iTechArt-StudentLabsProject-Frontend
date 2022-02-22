@@ -1,26 +1,26 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { authRoutes, publicRoutes } from '../routes/routes';
+import { contentRoutes } from '../routes/routes';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import Auth from '../pages/AuthPage/Auth';
-import MainPage from '../pages/MainPage/MainPage';
+
+import ContentExtension from '../components/Portals/ContentExtension';
 
 const AppRouter = () => {
     const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
     return (
         <Routes>
-            {publicRoutes.map(({ path, Component }) => (
-                <Route key={path} path={path} element={<Component />} />
-            ))}
             {isLoggedIn &&
-                authRoutes.map(({ path, Component }) => (
-                    <Route key={path} path={path} element={<Component />} />
+                contentRoutes.map(({ path, Component }) => (
+                    <Route
+                        key={path}
+                        path={path}
+                        element={
+                            <ContentExtension>
+                                <Component />
+                            </ContentExtension>
+                        }
+                    />
                 ))}
-            {isLoggedIn ? (
-                <Route path="*" element={<MainPage />} />
-            ) : (
-                <Route path="*" element={<Auth />} />
-            )}
         </Routes>
     );
 };

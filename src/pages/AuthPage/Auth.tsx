@@ -9,6 +9,7 @@ import {
 } from '../../store/actions/userActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import AuthInput from '../../components/AuthInput/AuthInput';
+import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
 
 const Auth = () => {
     const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Auth = () => {
                 style={{ opacity: isLoading ? 0.7 : 1 }}>
                 <div className="auth-form">
                     <form className="auth-form-content">
+                        {isLoading && <LoadingAnimation />}
                         <span className="auth-form-title">
                             {isRegistration ? 'Registration' : 'Login'}
                         </span>

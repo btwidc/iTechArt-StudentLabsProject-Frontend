@@ -4,15 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { logoutAuthAction } from '../../store/actions/userActions';
 
-import './SidebarNavMenu.scss';
-import { sidebarNavItemsRoutes } from '../../routes/sidebarNavItemsRoutes';
+import './NavMenu.scss';
+import { navItemsRoutes } from '../../routes/navItemsRoutes';
 
 interface SidebarNavProps {
     open: boolean;
     setOpen: (open: boolean) => void;
 }
 
-const SidebarNavMenu = ({ open, setOpen }: SidebarNavProps) => {
+const NavMenu = ({ open, setOpen }: SidebarNavProps) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -21,6 +21,7 @@ const SidebarNavMenu = ({ open, setOpen }: SidebarNavProps) => {
     const handleLogout = async (e: any) => {
         e.preventDefault();
         dispatch(logoutAuthAction(navigate));
+        closeSidebar();
     };
 
     return (
@@ -41,7 +42,7 @@ const SidebarNavMenu = ({ open, setOpen }: SidebarNavProps) => {
                 <div className="sidebar-nav-menu">
                     <nav className="nav-menu">
                         <ul className="nav-list">
-                            {sidebarNavItemsRoutes.map((item, index) => {
+                            {navItemsRoutes.map((item, index) => {
                                 return (
                                     <li
                                         key={index}
@@ -64,4 +65,4 @@ const SidebarNavMenu = ({ open, setOpen }: SidebarNavProps) => {
     );
 };
 
-export default SidebarNavMenu;
+export default NavMenu;

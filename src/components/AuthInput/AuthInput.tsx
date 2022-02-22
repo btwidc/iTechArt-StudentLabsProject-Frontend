@@ -1,6 +1,14 @@
 import React from 'react';
 import './AuthInput.scss';
-import { InputProps } from '../../types/componentsPropsTypes/InputProps';
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    labelName: string;
+    type: string;
+    id: string;
+    placeholder: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 const AuthInput = ({
     labelName,
@@ -12,7 +20,9 @@ const AuthInput = ({
 }: InputProps) => {
     return (
         <div className="auth-form-item">
-            <label className="auth-form-item-title">{labelName}</label>
+            <label className="auth-form-item-title">
+                {labelName}
+            </label>
             <input
                 className="auth-form-item-field"
                 type={type}

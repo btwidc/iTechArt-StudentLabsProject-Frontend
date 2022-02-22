@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { LOGIN_ROUTE } from '../../utils/routesPath';
 
 import './MainPage.scss';
 import Content from '../../components/Content/Content';
-import SidebarNavMenu from '../../components/SidebarNavMenu/SidebarNavMenu';
+import NavMenu from '../../components/NavMenu/NavMenu';
 import SidebarInfo from '../../components/SidebarInfo/SidebarInfo';
+import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
 
 const MainPage = () => {
-    const navigate = useNavigate();
-    const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
-
-    if (!isLoggedIn) {
-        navigate(LOGIN_ROUTE);
-    }
+    const isRefreshing = useTypedSelector((state) => state.user.isRefreshing);
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const showSidebar = () => setSidebarOpen(!sidebarOpen);
 
     return (
-        <div className="limiter">
+        <div className="limiter" style={{ opacity: isRefreshing ? 0.5 : 1 }}>
+            {isRefreshing && <LoadingAnimation />}
             <div className="header-container">
                 <button className="header-nav-drop-down" onClick={showSidebar}>
                     <img src="/images/dropDownIcon.png" alt="Drop down icon" />
@@ -29,7 +25,7 @@ const MainPage = () => {
                     <img src={'/images/iTechArtLogo.png'} alt="iTechArt logo" />
                 </Link>
             </div>
-            <SidebarNavMenu open={sidebarOpen} setOpen={setSidebarOpen} />
+            <NavMenu open={sidebarOpen} setOpen={setSidebarOpen} />
             <Content />
             <SidebarInfo />
         </div>

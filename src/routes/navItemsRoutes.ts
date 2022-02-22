@@ -1,4 +1,4 @@
-export const sidebarNavItemsRoutes = [
+export const navItemsRoutes = [
     {
         title: 'Profile',
         path: '/profile',
