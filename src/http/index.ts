@@ -29,6 +29,7 @@ api.interceptors.response.use(
                     'accessToken',
                     response.data.newAccessToken,
                 );
+                isRetry = false;
                 return api.request(originalRequest);
             } catch (e) {
                 console.log('Not auth');
