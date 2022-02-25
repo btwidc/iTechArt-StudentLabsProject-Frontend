@@ -1,16 +1,17 @@
-#sidebar-info-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    min-width: 20%;
+//Colors
+$sidebar-info-background-color: #f5f5f5ff;
+
+.sidebar-info-container {
+    display: flex;
+    flex: 0 0 20%;
     min-height: 100%;
-    background-color: #f5f5f5ff;
+    background-color: $sidebar-info-background-color;
     z-index: 1;
     transition: 0.8s;
 }
 
 @media screen and (max-width: 1080px) {
-    #sidebar-info-container {
-        min-width: 35%;
+    .sidebar-info-container {
+        flex: 0 0 30%;
     }
 }

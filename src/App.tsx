@@ -1,35 +1,32 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from './hooks/useTypedSelector';
+
+import { useDispatch } from 'react-redux';
 import { checkAuthAction } from './store/actions/userActions';
 
 import MainPage from './pages/MainPage/MainPage';
 import Auth from './pages/AuthPage/Auth';
-import AppRouter from './routers/AppRouter';
+import './App.scss';
 
 const App = () => {
-    const dispatch = useDispatch();
-    const refreshToken = localStorage.getItem('refreshToken');
+  const dispatch = useDispatch();
+  const refreshToken = localStorage.getItem('refreshToken');
 
-    const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
-    const isRefreshing = useTypedSelector((state) => state.user.isRefreshing);
+  const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
+  const isRefreshing = useTypedSelector((state) => state.user.isRefreshing);
 
-    useEffect(() => {
-        if (refreshToken) {
-            dispatch(checkAuthAction());
-        }
-    }, [dispatch, refreshToken]);
-
-    if (!isLoggedIn && !isRefreshing) {
-        return <Auth />;
+  useEffect(() => {
+    dispatch(checkAuthAction());
+    if (!refreshToken) {
+      return;
     }
+  }, [dispatch, refreshToken]);
 
-    return (
-        <div>
-            <MainPage />
-            <AppRouter />
-        </div>
-    );
+  if (!isLoggedIn && !isRefreshing) {
+    return <Auth />;
+  }
+
+  return <MainPage />;
 };
 
 export default App;
