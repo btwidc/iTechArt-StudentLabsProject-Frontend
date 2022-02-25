@@ -13,22 +13,22 @@ import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation
 import './Auth.scss';
 
 const Auth = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
   const isLoading = useTypedSelector((state) => state.user.loading);
 
-  const isRegistration = location.pathname === REGISTRATION_ROUTE;
+    const isRegistration = location.pathname === REGISTRATION_ROUTE;
 
   const [formState, setFormState] = useState({
     email: '',
     password: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setFormState({ ...formState, [e.target.id]: e.target.value });
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setFormState({ ...formState, [e.target.id]: e.target.value });
+    };
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -89,9 +89,7 @@ const Auth = () => {
             </div>
           </form>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Auth;

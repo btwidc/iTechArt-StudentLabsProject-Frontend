@@ -27,16 +27,16 @@ export enum UserActionTypes {
 
 export interface UserAuthAction {
   type:
-    | UserActionTypes.LOGIN_ACTION
-    | UserActionTypes.LOGIN_FAILED
-    | UserActionTypes.LOGIN_SUCCESS
-    | UserActionTypes.REGISTER_ACTION
-    | UserActionTypes.REGISTER_FAILED
-    | UserActionTypes.REGISTER_SUCCESS
-    | UserActionTypes.LOGOUT_FAILED
-    | UserActionTypes.LOGOUT_SUCCESS
-    | UserActionTypes.REFRESH_ACTION
-    | UserActionTypes.REFRESH_FAILED
-    | UserActionTypes.REFRESH_SUCCESS;
+  | UserActionTypes.LOGIN_ACTION
+  | UserActionTypes.LOGIN_FAILED
+  | UserActionTypes.LOGIN_SUCCESS
+  | UserActionTypes.REGISTER_ACTION
+  | UserActionTypes.REGISTER_FAILED
+  | UserActionTypes.REGISTER_SUCCESS
+  | UserActionTypes.LOGOUT_FAILED
+  | UserActionTypes.LOGOUT_SUCCESS
+  | UserActionTypes.REFRESH_ACTION
+  | UserActionTypes.REFRESH_FAILED
+  | UserActionTypes.REFRESH_SUCCESS;
   payload?: AuthResponse;
 }
