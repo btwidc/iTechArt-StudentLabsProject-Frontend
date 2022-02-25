@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "trailingComma": "all",
     "tabWidth": 2,
     "semi": true,
@@ -7,3 +8,13 @@
     "jsxBracketSameLine": true,
     "arrowParens": "always"
 }
+=======
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": true,
+  "arrowParens": "always"
+}
+>>>>>>> 980693ef236e628a08a9378e375c839b6e4c0081
