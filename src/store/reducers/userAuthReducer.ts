@@ -42,9 +42,9 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: true,
         loading: false,
-        user: action ?.payload ?.user,
-        accessToken: action ?.payload ?.accessToken,
-        refreshToken: action ?.payload ?.refreshToken,
+        user: action?.payload?.user,
+        accessToken: action?.payload?.accessToken,
+        refreshToken: action?.payload?.refreshToken,
         message: 'Successfully logged',
       } as UserAuthState;
     case UserActionTypes.REGISTER_ACTION:
@@ -69,9 +69,9 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: true,
         loading: false,
-        user: action ?.payload ?.user,
-        accessToken: action ?.payload ?.accessToken,
-        refreshToken: action ?.payload ?.refreshToken,
+        user: action?.payload?.user,
+        accessToken: action?.payload?.accessToken,
+        refreshToken: action?.payload?.refreshToken,
         message: 'Successfully registered',
       } as UserAuthState;
     case UserActionTypes.LOGOUT_FAILED:
