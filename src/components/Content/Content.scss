@@ -1,12 +1,9 @@
-//Colors
-$content-background-color: #f1f1f199;
-
 .content-container {
     position: relative;
-    display: flex;
-    flex: 0 0 60%;
+    display: grid;
+    grid-column: content;
     min-height: 100%;
-    border-left: 1.5px solid #e7e6e699;
-    border-right: 1.5px solid #e7e6e699;
-    background-color: $content-background-color;
+    border-left: 1.5px solid var(--border-columns-color);
+    border-right: 1.5px solid var(--border-columns-color);
+    background-color: var(--content-background-color);
 }

@@ -7,7 +7,7 @@ import './MainPage.scss';
 
 const MainPage = () => {
   return (
-    <div className="limiter">
+    <div className="main-page">
       <NavMenu />
       <Content />
       <SidebarInfo />

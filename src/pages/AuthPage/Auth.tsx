@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/routesPath';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../routes/routesPath';
 import { useDispatch } from 'react-redux';
 import {
   loginAuthAction,

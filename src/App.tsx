@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTypedSelector } from './hooks/useTypedSelector';
 
 import { useDispatch } from 'react-redux';
@@ -8,19 +8,14 @@ import MainPage from './pages/MainPage/MainPage';
 import Auth from './pages/AuthPage/Auth';
 import './App.scss';
 
-const App = () => {
+const App: FC = () => {
   const dispatch = useDispatch();
-  const refreshToken = localStorage.getItem('refreshToken');
 
-  const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
-  const isRefreshing = useTypedSelector((state) => state.user.isRefreshing);
+  const { isLoggedIn, isRefreshing } = useTypedSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(checkAuthAction());
-    if (!refreshToken) {
-      return;
-    }
-  }, [dispatch, refreshToken]);
+  }, [dispatch]);
 
   if (!isLoggedIn && !isRefreshing) {
     return <Auth />;

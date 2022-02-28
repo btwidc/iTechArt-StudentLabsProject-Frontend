@@ -5,7 +5,7 @@ import './LoadingAnimation.scss';
 const LoadingAnimation = () => {
   return (
     <div className="loading-animation-container">
-      <FadingBalls color="#ffa07a" width="16px" height="15px" duration="0.8s" />
+      <FadingBalls color="#e61919" width="16px" height="15px" duration="0.8s" />
     </div>
   );
 };

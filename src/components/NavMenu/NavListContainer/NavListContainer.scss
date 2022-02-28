@@ -3,14 +3,12 @@
   width: 100%;
   padding-left: 10%;
 
+  @media screen and (max-width: 1080px) {
+    padding: 0;
+  }
+
   .nav-list-container {
     position: relative;
     height: 100%;
-  }
-}
-
-@media screen and (max-width: 1080px) {
-  .nav-menu-list-container {
-    padding: 0;
   }
 }

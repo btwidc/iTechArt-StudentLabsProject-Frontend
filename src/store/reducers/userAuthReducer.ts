@@ -1,4 +1,3 @@
-import { IUser } from '../../types/authTypes/requests/IUser';
 import {
   UserActionTypes,
   UserAuthAction,
@@ -9,7 +8,7 @@ const initialUserState: UserAuthState = {
   isLoggedIn: false,
   isRefreshing: false,
   loading: false,
-  user: {} as IUser,
+  user: null,
   accessToken: '',
   refreshToken: '',
   message: '',
@@ -32,9 +31,6 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: false,
         loading: false,
-        user: {} as IUser,
-        accessToken: '',
-        refreshToken: '',
         message: 'Error during login',
       };
     case UserActionTypes.LOGIN_SUCCESS:
@@ -42,11 +38,9 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: true,
         loading: false,
-        user: action?.payload?.user,
-        accessToken: action?.payload?.accessToken,
-        refreshToken: action?.payload?.refreshToken,
         message: 'Successfully logged',
-      } as UserAuthState;
+        ...action?.payload,
+      };
     case UserActionTypes.REGISTER_ACTION:
       return {
         ...state,
@@ -59,9 +53,6 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: false,
         loading: false,
-        user: {} as IUser,
-        accessToken: '',
-        refreshToken: '',
         message: 'Error during register',
       };
     case UserActionTypes.REGISTER_SUCCESS:
@@ -69,11 +60,9 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: true,
         loading: false,
-        user: action?.payload?.user,
-        accessToken: action?.payload?.accessToken,
-        refreshToken: action?.payload?.refreshToken,
         message: 'Successfully registered',
-      } as UserAuthState;
+        ...action?.payload,
+      };
     case UserActionTypes.LOGOUT_FAILED:
       return {
         ...state,

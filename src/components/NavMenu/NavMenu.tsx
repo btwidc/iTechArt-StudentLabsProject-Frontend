@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import NavListContainer from '../NavListContainer/NavListContainer';
-import NavList from '../NavList/NavList';
+import NavListContainer from './NavListContainer/NavListContainer';
+import NavList from './NavList/NavList';
+
 import './NavMenu.scss';
 
 const NavMenu = () => {

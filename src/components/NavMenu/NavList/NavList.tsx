@@ -1,25 +1,25 @@
 import React from 'react';
-import { navItemsRoutes } from '../../routes/navItemsRoutes';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { logoutAuthAction } from '../../store/actions/userActions';
+import { logoutAuthAction } from '../../../store/actions/userActions';
 import { useDispatch } from 'react-redux';
 
 import { MdLogout } from 'react-icons/md';
 import './NavList.scss';
+import { contentRoutes } from '../../../routes/routes';
 
 const NavList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(logoutAuthAction(navigate));
   };
 
   return (
     <ul className="nav-list">
-      {navItemsRoutes.map((item) => {
+      {contentRoutes.map((item) => {
         const navItem = (
           <li key={item.title} className={item.className}>
             <Link to={item.path}>
@@ -31,12 +31,10 @@ const NavList = () => {
         return navItem;
       })}
       <li className="divider" />
-      <li className="nav-item">
-        <Link to="#" onClick={handleLogout}>
-          <MdLogout />
-          <span>Logout</span>
-        </Link>
-      </li>
+      <button onClick={handleLogout}>
+        <MdLogout />
+        <span>Logout</span>
+      </button>
     </ul>
   );
 };

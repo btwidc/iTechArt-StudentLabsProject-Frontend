@@ -1,11 +1,13 @@
+import { Dispatch } from 'redux';
+import { LOGIN_ROUTE, MAIN_ROUTE } from '../../routes/routesPath';
+
 import {
   UserAuthAction,
   UserActionTypes,
 } from '../../types/userActionsTypes/userActionsTypes';
-import { Dispatch } from 'redux';
-import { IUserAuth } from '../../types/authTypes/requests/IUserAuth';
-import { LOGIN_ROUTE, MAIN_ROUTE } from '../../utils/routesPath';
+
 import AuthService from '../../services/AuthService';
+import { IUserAuth } from '../../types/authTypes/requests/IUserAuth';
 
 export const loginAuthAction = (formState: IUserAuth, navigate: any) => {
   return async (dispatch: Dispatch<UserAuthAction>) => {

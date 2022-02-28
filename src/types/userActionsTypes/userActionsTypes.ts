@@ -5,7 +5,7 @@ export interface UserAuthState {
   isLoggedIn: boolean;
   loading: boolean;
   isRefreshing: boolean;
-  user: IUser;
+  user: IUser | null;
   accessToken: string;
   refreshToken: string;
   message: string;

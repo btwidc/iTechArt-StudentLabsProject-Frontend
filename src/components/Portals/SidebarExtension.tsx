@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
+
 import Portal from './Portal';
 
-const SidebarExtension: FC = ({ children }) => {
-  const sidebarElement = document.getElementsByClassName(
-    'sidebar-info-container',
-  )[0];
+interface ChildrenProps {
+  children?: ReactNode;
+}
+
+const SidebarExtension: FC = ({ children }: ChildrenProps) => {
+  const sidebarElement = document.getElementById('sidebar-extension');
 
   return sidebarElement ? (
     <Portal root={sidebarElement}>{children}</Portal>

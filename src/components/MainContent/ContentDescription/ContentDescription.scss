@@ -1,0 +1,19 @@
+.content-description-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .content-description {
+    text-align: justify;
+    width: 100%;
+    font-family: Poppins, sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--text-color);
+    line-height: 1.2;
+
+    @media screen and (max-width: 1080px) {
+      font-size: 16px;
+    }
+  }
+}
