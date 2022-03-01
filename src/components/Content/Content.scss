@@ -3,7 +3,7 @@
     display: grid;
     grid-column: content;
     min-height: 100%;
-    border-left: 1.5px solid var(--border-columns-color);
-    border-right: 1.5px solid var(--border-columns-color);
+    border-left: var(--border-columns);
+    border-right: var(--border-columns);
     background-color: var(--content-background-color);
 }

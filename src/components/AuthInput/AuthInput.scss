@@ -1,10 +1,3 @@
-// Fonts
-$auth-form-font-family: 'Poppins', sans-serif;
-
-//Colors
-$auth-form-title-color: #333333;
-$auth-form-hover-focus-color: #e61919;
-
 .auth-form-item {
     width: 100%;
     margin-bottom: 20px;
@@ -14,12 +7,12 @@ $auth-form-hover-focus-color: #e61919;
     padding-left: 10px;
     font-size: 14px;
     font-weight: 400;
-    font-family: $auth-form-font-family;
-    color: $auth-form-title-color;
+    font-family: var(--text-font-family);
+    color: var(--title-color);
 }
 
 .auth-form-item-title:hover {
-    color: $auth-form-hover-focus-color;
+    color: var(--auth-form-link-hover-color);
     cursor: pointer;
 }
 
@@ -29,14 +22,14 @@ $auth-form-hover-focus-color: #e61919;
     width: 100%;
     height: 50px;
     border: none;
-    border-bottom: 2px solid #d9d9d9;
+    border-bottom: var(--auth-form-input-border-bottom);
     outline: none;
     font-size: 16px;
     font-weight: 500;
-    font-family: $auth-form-font-family;
-    color: $auth-form-title-color;
+    font-family: var(--text-font-family);
+    color: var(--title-color);
 }
 
 .auth-form-item-field:focus {
-    border-bottom: 2px solid $auth-form-hover-focus-color;
+    border-bottom: var(--auth-form-input-border-bottom-active);
 }
