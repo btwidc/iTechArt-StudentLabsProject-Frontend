@@ -1,24 +1,27 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import AppRouter from './routes/AppRouter';
-import { checkAuthAction } from './store/actions/userActions';
+import React, { FC, useEffect } from 'react';
+import { useTypedSelector } from './hooks/useTypedSelector';
+
 import { useDispatch } from 'react-redux';
+import { checkAuthAction } from './store/actions/userActions';
 
-const App = () => {
-    const dispatch = useDispatch();
-    const refreshToken = localStorage.getItem('refreshToken');
+import MainPage from './pages/MainPage/MainPage';
+import Auth from './pages/AuthPage/Auth';
+import './App.scss';
 
-    useEffect(() => {
-        if (refreshToken) {
-            dispatch(checkAuthAction());
-        }
-    }, [dispatch, refreshToken]);
+const App: FC = () => {
+  const dispatch = useDispatch();
 
-    return (
-        <BrowserRouter>
-            <AppRouter />
-        </BrowserRouter>
-    );
+  const { isLoggedIn, isRefreshing } = useTypedSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(checkAuthAction());
+  }, [dispatch]);
+
+  if (!isLoggedIn && !isRefreshing) {
+    return <Auth />;
+  }
+
+  return <MainPage />;
 };
 
 export default App;

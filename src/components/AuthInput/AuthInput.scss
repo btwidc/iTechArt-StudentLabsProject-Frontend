@@ -3,6 +3,7 @@ $auth-form-font-family: 'Poppins', sans-serif;
 
 //Colors
 $auth-form-title-color: #333333;
+$auth-form-hover-focus-color: #e61919;
 
 .auth-form-item {
     width: 100%;
@@ -18,7 +19,7 @@ $auth-form-title-color: #333333;
 }
 
 .auth-form-item-title:hover {
-    color: salmon;
+    color: $auth-form-hover-focus-color;
     cursor: pointer;
 }
 
@@ -37,5 +38,5 @@ $auth-form-title-color: #333333;
 }
 
 .auth-form-item-field:focus {
-    border-bottom: 2px solid salmon;
+    border-bottom: 2px solid $auth-form-hover-focus-color;
 }

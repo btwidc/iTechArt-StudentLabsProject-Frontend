@@ -1,0 +1,14 @@
+.nav-menu-list-container {
+  height: 90%;
+  width: 100%;
+  padding-left: 10%;
+
+  @media screen and (max-width: 1080px) {
+    padding: 0;
+  }
+
+  .nav-list-container {
+    position: relative;
+    height: 100%;
+  }
+}

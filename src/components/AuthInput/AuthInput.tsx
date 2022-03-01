@@ -20,7 +20,9 @@ const AuthInput = ({
 }: InputProps) => {
     return (
         <div className="auth-form-item">
-            <label className="auth-form-item-title">{labelName}</label>
+            <label className="auth-form-item-title">
+                {labelName}
+            </label>
             <input
                 className="auth-form-item-field"
                 type={type}

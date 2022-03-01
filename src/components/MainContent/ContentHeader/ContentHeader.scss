@@ -1,0 +1,30 @@
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  margin-bottom: 30px;
+
+  .content-header-title {
+    display: flex;
+    color: var(--title-color);
+  }
+
+  button {
+    padding: 10px 40px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  @media screen and (max-width: 1080px) {
+    margin-bottom: 15px;
+
+    h2 {
+      font-size: 22px;
+    }
+
+    button {
+      padding: 10px 25px;
+      font-size: 15px;
+    }
+  }
+}

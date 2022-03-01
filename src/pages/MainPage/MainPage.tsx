@@ -1,18 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { LOGIN_ROUTE } from '../../utils/routesPath';
+
+import NavMenu from '../../components/NavMenu/NavMenu';
+import Content from '../../components/Content/Content';
+import SidebarInfo from '../../components/SidebarInfo/SidebarInfo';
 import './MainPage.scss';
 
 const MainPage = () => {
-    const navigate = useNavigate();
-    const isLoggedIn = useTypedSelector((state) => state.user.isLoggedIn);
-
-    if (!isLoggedIn) {
-        navigate(LOGIN_ROUTE);
-    }
-
-    return <div className="limiter"></div>;
+  return (
+    <div className="main-page">
+      <NavMenu />
+      <Content />
+      <SidebarInfo />
+    </div>
+  );
 };
 
 export default MainPage;

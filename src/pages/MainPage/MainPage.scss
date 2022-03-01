@@ -1,11 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+.main-page {
+  display: grid;
+  grid-template-columns: [nav] 20% [content] 1fr [sidebar] 20%;
+  width: 100%;
+  min-height: 100vh;
 
-.limiter {
-    width: 100%;
-    height: 100vh;
-    margin: 0 auto;
+  @media screen and (max-width: 1080px) {
+    grid-template-columns: [nav] 10% [content] 1fr [sidebar] 30%;
+  }
 }
