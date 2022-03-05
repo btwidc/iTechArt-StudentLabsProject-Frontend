@@ -1,94 +1,140 @@
 import { Dispatch } from 'redux';
-import { LOGIN_ROUTE, MAIN_ROUTE } from '../../routes/routesPath';
 
 import {
-  UserAuthAction,
-  UserActionTypes,
-} from '../../types/userActionsTypes/userActionsTypes';
+  UserAuthActions,
+  UserAuthActionsTypes,
+} from '../../types/userActionsTypes/userAuthActionsTypes';
 
 import AuthService from '../../services/AuthService';
 import { IUserAuth } from '../../types/authTypes/requests/IUserAuth';
+import { IUserProfileInfo } from '../../types/authTypes/requests/IUserProfileInfo';
 
-export const loginAuthAction = (formState: IUserAuth, navigate: any) => {
-  return async (dispatch: Dispatch<UserAuthAction>) => {
+export const loginAuthAction = (formState: IUserAuth) => {
+  return async (dispatch: Dispatch<UserAuthActions>) => {
     try {
       dispatch({
-        type: UserActionTypes.LOGIN_ACTION,
+        type: UserAuthActionsTypes.LOGIN_ACTION,
       });
       const response = await AuthService.login(formState);
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
       dispatch({
-        type: UserActionTypes.LOGIN_SUCCESS,
+        type: UserAuthActionsTypes.LOGIN_SUCCESS,
         payload: response.data,
       });
-      navigate(MAIN_ROUTE);
-    } catch (e) {
       dispatch({
-        type: UserActionTypes.LOGIN_FAILED,
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_ACTION,
       });
+      const isSetProfile = await AuthService.getProfileInfo();
+      dispatch({
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS,
+        payload: isSetProfile.data,
+      });
+    } catch (e: any) {
+      if (e.response.status === 400) {
+        dispatch({
+          type: UserAuthActionsTypes.GET_PROFILE_INFO_FAILED,
+        });
+      } else {
+        dispatch({
+          type: UserAuthActionsTypes.LOGIN_FAILED,
+        });
+      }
     }
   };
 };
 
-export const registerAuthAction = (formState: IUserAuth, navigate: any) => {
-  return async (dispatch: Dispatch<UserAuthAction>) => {
+export const registerAuthAction = (formState: IUserAuth) => {
+  return async (dispatch: Dispatch<UserAuthActions>) => {
     try {
       dispatch({
-        type: UserActionTypes.REGISTER_ACTION,
+        type: UserAuthActionsTypes.REGISTER_ACTION,
       });
       const response = await AuthService.registration(formState);
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('refreshToken', response.data.refreshToken);
       dispatch({
-        type: UserActionTypes.REGISTER_SUCCESS,
+        type: UserAuthActionsTypes.REGISTER_SUCCESS,
         payload: response.data,
       });
-      navigate(LOGIN_ROUTE);
     } catch (e) {
       dispatch({
-        type: UserActionTypes.REGISTER_FAILED,
+        type: UserAuthActionsTypes.REGISTER_FAILED,
       });
     }
-  };
+  }
 };
 
-export const logoutAuthAction = (navigate: any) => {
-  return async (dispatch: Dispatch<UserAuthAction>) => {
+export const logoutAuthAction = () => {
+  return async (dispatch: Dispatch<UserAuthActions>) => {
     try {
       const refreshToken = localStorage.getItem('refreshToken');
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
       if (refreshToken) await AuthService.logout(refreshToken);
       dispatch({
-        type: UserActionTypes.LOGOUT_SUCCESS,
+        type: UserAuthActionsTypes.LOGOUT_SUCCESS,
       });
-      navigate(LOGIN_ROUTE);
     } catch (e) {
       dispatch({
-        type: UserActionTypes.LOGOUT_FAILED,
+        type: UserAuthActionsTypes.LOGOUT_FAILED,
       });
     }
   };
 };
 
 export const checkAuthAction = () => {
-  return async (dispatch: Dispatch<UserAuthAction>) => {
+  return async (dispatch: Dispatch<UserAuthActions>) => {
     try {
       dispatch({
-        type: UserActionTypes.REFRESH_ACTION,
+        type: UserAuthActionsTypes.REFRESH_ACTION,
       });
-
       const refreshToken = localStorage.getItem('refreshToken');
       const response = await AuthService.refresh(refreshToken);
-      localStorage.setItem('accessToken', response.data.newAccessToken);
+      localStorage.setItem('accessToken', response.data);
+      const isSetProfile = await AuthService.getProfileInfo();
       dispatch({
-        type: UserActionTypes.REFRESH_SUCCESS,
+        type: UserAuthActionsTypes.REFRESH_SUCCESS,
+        payload: isSetProfile.data,
       });
     } catch (e) {
       dispatch({
-        type: UserActionTypes.REFRESH_FAILED,
+        type: UserAuthActionsTypes.REFRESH_FAILED,
       });
+    }
+  };
+};
+
+export const addProfileInfo = (
+  profileFormState: IUserProfileInfo,
+) => {
+  return async (dispatch: Dispatch<UserAuthActions>) => {
+    try {
+      dispatch({
+        type: UserAuthActionsTypes.ADD_PROFILE_INFO_ACTION,
+      });
+      await AuthService.addProfileInfo(profileFormState);
+      dispatch({
+        type: UserAuthActionsTypes.ADD_PROFILE_INFO_SUCCESS,
+      });
+      dispatch({
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_ACTION,
+      });
+      const isSetProfile = await AuthService.getProfileInfo();
+      dispatch({
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS,
+        payload: isSetProfile.data,
+      });
+    } catch (e: any) {
+      if (e.response.status === 400) {
+        dispatch({
+          type: UserAuthActionsTypes.GET_PROFILE_INFO_FAILED,
+        });
+      } else {
+        dispatch({
+          type: UserAuthActionsTypes.ADD_PROFILE_INFO_FAILED,
+        });
+      }
     }
   };
 };

@@ -1,39 +1,47 @@
 import {
-  UserActionTypes,
-  UserAuthAction,
+  UserAuthActionsTypes,
+  UserAuthActions,
   UserAuthState,
-} from '../../types/userActionsTypes/userActionsTypes';
+} from '../../types/userActionsTypes/userAuthActionsTypes';
 
 const initialUserState: UserAuthState = {
+  message: '',
   isLoggedIn: false,
   isRefreshing: false,
+  isSetProfileInfo: false,
   loading: false,
   user: null,
   accessToken: '',
   refreshToken: '',
-  message: '',
+  name: '',
+  surname: '',
+  email: '',
+  skype: '',
+  ageExperience: 0,
+  department: '',
+  summary: '',
 };
 
 export const userAuthReducer = (
   state = initialUserState,
-  action: UserAuthAction,
+  action: UserAuthActions,
 ): UserAuthState => {
   switch (action.type) {
-    case UserActionTypes.LOGIN_ACTION:
+    case UserAuthActionsTypes.LOGIN_ACTION:
       return {
         ...state,
         isLoggedIn: false,
         loading: true,
         message: 'Login...',
       };
-    case UserActionTypes.LOGIN_FAILED:
+    case UserAuthActionsTypes.LOGIN_FAILED:
       return {
         ...state,
         isLoggedIn: false,
         loading: false,
         message: 'Error during login',
       };
-    case UserActionTypes.LOGIN_SUCCESS:
+    case UserAuthActionsTypes.LOGIN_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
@@ -41,21 +49,21 @@ export const userAuthReducer = (
         message: 'Successfully logged',
         ...action?.payload,
       };
-    case UserActionTypes.REGISTER_ACTION:
+    case UserAuthActionsTypes.REGISTER_ACTION:
       return {
         ...state,
         isLoggedIn: false,
         loading: true,
         message: 'Register...',
       };
-    case UserActionTypes.REGISTER_FAILED:
+    case UserAuthActionsTypes.REGISTER_FAILED:
       return {
         ...state,
         isLoggedIn: false,
         loading: false,
         message: 'Error during register',
       };
-    case UserActionTypes.REGISTER_SUCCESS:
+    case UserAuthActionsTypes.REGISTER_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
@@ -63,21 +71,21 @@ export const userAuthReducer = (
         message: 'Successfully registered',
         ...action?.payload,
       };
-    case UserActionTypes.LOGOUT_FAILED:
+    case UserAuthActionsTypes.LOGOUT_FAILED:
       return {
         ...state,
         isLoggedIn: true,
         loading: false,
         message: 'Error during logout',
       };
-    case UserActionTypes.LOGOUT_SUCCESS:
+    case UserAuthActionsTypes.LOGOUT_SUCCESS:
       return {
         ...state,
         isLoggedIn: false,
         loading: false,
         message: 'Successfully logout',
       };
-    case UserActionTypes.REFRESH_ACTION:
+    case UserAuthActionsTypes.REFRESH_ACTION:
       return {
         ...state,
         isLoggedIn: false,
@@ -85,7 +93,7 @@ export const userAuthReducer = (
         loading: true,
         message: 'Refresh...',
       };
-    case UserActionTypes.REFRESH_FAILED:
+    case UserAuthActionsTypes.REFRESH_FAILED:
       return {
         ...state,
         isLoggedIn: false,
@@ -93,13 +101,64 @@ export const userAuthReducer = (
         loading: false,
         message: 'Error during refresh',
       };
-    case UserActionTypes.REFRESH_SUCCESS:
+    case UserAuthActionsTypes.REFRESH_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
         isRefreshing: false,
+        isSetProfileInfo: true,
         loading: false,
         message: 'Successfully refreshed',
+        ...action?.payload,
+      };
+    case UserAuthActionsTypes.ADD_PROFILE_INFO_ACTION:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isSetProfileInfo: false,
+        loading: true,
+        message: 'Adding profile info...',
+      };
+    case UserAuthActionsTypes.ADD_PROFILE_INFO_FAILED:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isSetProfileInfo: false,
+        loading: false,
+        message: 'Error during adding profile info',
+      };
+    case UserAuthActionsTypes.ADD_PROFILE_INFO_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isSetProfileInfo: true,
+        loading: false,
+        message: 'Successfully add profile info',
+      };
+    case UserAuthActionsTypes.GET_PROFILE_INFO_ACTION:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isSetProfileInfo: false,
+        loading: true,
+        message: 'Getting profile info...',
+      };
+    case UserAuthActionsTypes.GET_PROFILE_INFO_FAILED:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isSetProfileInfo: false,
+        loading: false,
+        message: 'Error during getting profile info',
+      };
+    case UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isSetProfileInfo: true,
+        loading: false,
+        message: 'Successfully get profile info',
+        ...action?.payload,
       };
     default:
       return state;

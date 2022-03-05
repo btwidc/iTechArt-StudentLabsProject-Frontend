@@ -1,4 +1,4 @@
-.limiter {
+.auth-page {
     width: 100%;
     margin: 0 auto;
 }
@@ -21,6 +21,10 @@
     border: var(--auth-form-border);
     border-radius: 10px;
     background: inherit;
+
+    @media screen and (max-width: 1080px) {
+        padding: 20px 30px;
+    }
 }
 
 .auth-form-content {
@@ -30,11 +34,15 @@
 .auth-form-title {
     display: block;
     text-align: center;
-    padding-bottom: 40px;
+    margin-bottom: 40px;
     color: var(--title-color);
     font-size: 38px;
     font-family: var(--text-font-family);
     font-weight: 700;
+
+    @media screen and (max-width: 1080px) {
+        margin-bottom: 20px;
+    }
 }
 
 .auth-form-item {

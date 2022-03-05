@@ -6,12 +6,15 @@ import { checkAuthAction } from './store/actions/userActions';
 
 import MainPage from './pages/MainPage/MainPage';
 import Auth from './pages/AuthPage/Auth';
+import AuthProfileInfo from './pages/AuthProfileInfo/AuthProfileInfo';
 import './App.scss';
 
 const App: FC = () => {
   const dispatch = useDispatch();
 
-  const { isLoggedIn, isRefreshing } = useTypedSelector((state) => state.user);
+  const { isLoggedIn, isRefreshing, isSetProfileInfo } = useTypedSelector(
+    (state) => state.user,
+  );
 
   useEffect(() => {
     dispatch(checkAuthAction());
@@ -19,6 +22,10 @@ const App: FC = () => {
 
   if (!isLoggedIn && !isRefreshing) {
     return <Auth />;
+  }
+
+  if (isLoggedIn && !isSetProfileInfo) {
+    return <AuthProfileInfo />;
   }
 
   return <MainPage />;

@@ -1,0 +1,75 @@
+.auth-profile-info-page {
+  width: 100%;
+  margin: 0 auto;
+
+  .auth-profile-info-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 15px;
+
+    .auth-profile-info-form {
+      position: relative;
+      overflow: hidden;
+      width: 900px;
+      padding: 30px 90px;
+      border: var(--auth-form-border);
+      border-radius: 10px;
+      background: inherit;
+
+      @media screen and (max-width: 1080px) {
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.auth-profile-info-form-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .auth-profile-info-form-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--title-color);
+    font-size: 38px;
+    font-family: var(--text-font-family);
+    font-weight: 700;
+
+    @media screen and (max-width: 1080px) {
+      margin-bottom: 5px;
+    }
+  }
+
+  .auth-form-profile-button-field {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+    z-index: 1;
+
+    .auth-form-profile-button {
+      width: 60%;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: var(--text-font-family);
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+
+
+

@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { contentRoutes } from '../../../routes/routes';
 
 import { logoutAuthAction } from '../../../store/actions/userActions';
 import { useDispatch } from 'react-redux';
 
 import { MdLogout } from 'react-icons/md';
+
 import './NavList.scss';
-import { contentRoutes } from '../../../routes/routes';
 
 const NavList = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(logoutAuthAction(navigate));
+    dispatch(logoutAuthAction());
   };
 
   return (

@@ -14,28 +14,25 @@ api.interceptors.request.use((config: any) => {
 
 let isRetry = false;
 api.interceptors.response.use(
-    (config) => {
-        return config;
-    },
-    async (error) => {
-        const originalRequest = error.config;
-        if (error.response.status === 401 && !isRetry) {
-            isRetry = true;
-            try {
-                const refreshToken = localStorage.getItem('refreshToken');
-                const response = await AuthService.refresh(refreshToken);
-                localStorage.setItem(
-                    'accessToken',
-                    response.data.newAccessToken,
-                );
-                isRetry = false;
-                return api.request(originalRequest);
-            } catch (e) {
-                console.log('Not auth');
-            }
-        }
-        return Promise.reject(error);
-    },
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !isRetry) {
+      isRetry = true;
+      try {
+        const refreshToken = localStorage.getItem('refreshToken');
+        const response = await AuthService.refresh(refreshToken);
+        localStorage.setItem('accessToken', response.data);
+        isRetry = false;
+        return api.request(originalRequest);
+      } catch (e) {
+        console.log('Not auth');
+      }
+    }
+    return Promise.reject(error);
+  },
 );
 
 export default api;
