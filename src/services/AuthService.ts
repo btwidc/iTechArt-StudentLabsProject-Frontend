@@ -2,7 +2,6 @@ import api from '../http/index';
 import { IUserAuth } from '../types/authTypes/requests/IUserAuth';
 import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../types/authTypes/responses/AuthResponse';
-import { RefreshResponse } from '../types/authTypes/responses/RefreshResponse';
 import { IUserProfileInfo } from '../types/authTypes/requests/IUserProfileInfo';
 import { UserProfileInfoResponse } from '../types/authTypes/responses/UserProfileInfoResponse';
 
@@ -37,7 +36,7 @@ export default class AuthService {
 
   static async getProfileInfo(): Promise<
     AxiosResponse<UserProfileInfoResponse>
-  > {
+    > {
     return api.get<UserProfileInfoResponse>('/user/profile');
   }
 }

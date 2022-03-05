@@ -2,7 +2,7 @@ import React from 'react';
 
 import './ProfileRow.scss';
 
-interface ProfileRow {
+interface ProfileRowProps {
   labelName: string;
   rowInfo: string | number;
 }
@@ -10,7 +10,7 @@ interface ProfileRow {
 const ProfileRow = ({
   labelName,
   rowInfo
-}: ProfileRow) => {
+}: ProfileRowProps) => {
   return (
       <div className="profile-info-row">
         <h3 className="profile-info-label">{labelName}</h3>
