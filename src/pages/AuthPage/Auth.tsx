@@ -9,7 +9,7 @@ import {
 } from '../../store/actions/userActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import AuthInput from '../../components/AuthInput/AuthInput';
+import Input from '../../components/Input/Input';
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
 import './Auth.scss';
 
@@ -53,7 +53,7 @@ const Auth = () => {
             <span className="auth-form-title">
               {isRegistration ? 'Registration' : 'Login'}
             </span>
-            <AuthInput
+            <Input
               className="auth-form-item"
               labelName="E-mail"
               type="text"
@@ -62,7 +62,7 @@ const Auth = () => {
               value={formState.email}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-item"
               labelName="Password"
               type="password"

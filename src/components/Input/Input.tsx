@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './AuthInput.scss';
+import './Input.scss';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className: string;
@@ -12,7 +12,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AuthInput = ({
+const Input = ({
   className,
   labelName,
   type,
@@ -38,4 +38,4 @@ const AuthInput = ({
   );
 };
 
-export default AuthInput;
+export default Input;

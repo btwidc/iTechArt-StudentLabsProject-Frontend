@@ -6,7 +6,7 @@ import { checkAuthAction } from './store/actions/userActions';
 
 import MainPage from './pages/MainPage/MainPage';
 import Auth from './pages/AuthPage/Auth';
-import AuthProfileInfo from './pages/AuthProfileInfo/AuthProfileInfo';
+import ProfileInfo from './pages/ProfileInfo/ProfileInfo';
 import './App.scss';
 
 const App: FC = () => {
@@ -25,7 +25,7 @@ const App: FC = () => {
   }
 
   if (isLoggedIn && !isSetProfileInfo) {
-    return <AuthProfileInfo />;
+    return <ProfileInfo />;
   }
 
   return <MainPage />;

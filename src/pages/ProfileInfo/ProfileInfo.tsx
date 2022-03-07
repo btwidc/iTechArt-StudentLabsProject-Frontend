@@ -5,10 +5,10 @@ import { addProfileInfo } from '../../store/actions/userActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
-import AuthInput from '../../components/AuthInput/AuthInput';
-import './AuthProfileInfo.scss';
+import Input from '../../components/Input/Input';
+import './ProfileInfo.scss';
 
-const AuthProfileInfo = () => {
+const ProfileInfo = () => {
   const dispatch = useDispatch();
 
   const isLoading = useTypedSelector((state) => state.user.loading);
@@ -50,7 +50,7 @@ const AuthProfileInfo = () => {
           <form className="auth-profile-info-form-content">
             {isLoading && <LoadingAnimation />}
             <span className="auth-profile-info-form-title">Profile Info</span>
-            <AuthInput
+            <Input
               className="auth-form-profile-item"
               labelName="Name"
               type="text"
@@ -59,7 +59,7 @@ const AuthProfileInfo = () => {
               value={profileFormState.name}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-profile-item"
               labelName="Surname"
               type="text"
@@ -68,7 +68,7 @@ const AuthProfileInfo = () => {
               value={profileFormState.surname}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-profile-item"
               labelName="E-mail"
               type="text"
@@ -77,7 +77,7 @@ const AuthProfileInfo = () => {
               value={profileFormState.email}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-profile-item"
               labelName="Skype"
               type="text"
@@ -86,7 +86,7 @@ const AuthProfileInfo = () => {
               value={profileFormState.skype}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-profile-item"
               labelName="Age experience"
               type="number"
@@ -95,7 +95,7 @@ const AuthProfileInfo = () => {
               value={profileFormState.ageExperience.toString()}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-profile-item"
               labelName="Department"
               type="text"
@@ -104,7 +104,7 @@ const AuthProfileInfo = () => {
               value={profileFormState.department}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
               className="auth-form-profile-summary"
               labelName="Summary"
               type="text"
@@ -128,4 +128,4 @@ const AuthProfileInfo = () => {
   );
 };
 
-export default AuthProfileInfo;
+export default ProfileInfo;
