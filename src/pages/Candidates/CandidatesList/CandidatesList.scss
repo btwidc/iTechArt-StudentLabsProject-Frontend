@@ -1,0 +1,45 @@
+.candidates-list-container {
+    width: 100%;
+    height: 100%;
+    padding: 50px 70px;
+
+    @media screen and (max-width: 1080px) {
+        padding: 10px 10px;
+    }
+
+    .candidates-list-row {
+      display: flex;
+      width: 100%;
+      height: 8%;
+      margin-bottom: 5px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px -3px #000000;
+
+      @media screen and (max-width: 1080px) {
+          height: 7%;
+      }
+
+      a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        padding-left: 20px;
+        text-decoration: none;
+        color: var(--candidates-list-item-text-color);
+
+        @media screen and (max-width: 1080px) {
+            padding-left: 15px;
+        }
+
+        &:hover {
+          color: var(--candidates-list-item-hover-text-color);
+          border-radius: 10px;
+          box-shadow: 0 3px 8px -3px var(--candidates-list-item-hover-text-color);
+          cursor: pointer;
+          transition: 0.2s;
+        }
+      }
+
+    }
+}

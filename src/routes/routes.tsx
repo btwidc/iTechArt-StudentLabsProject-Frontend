@@ -12,7 +12,7 @@ import { IoMdPeople } from 'react-icons/io';
 import Profile from '../pages/Profile/Profile';
 import Events from '../pages/Events/Events';
 import Notes from '../pages/Notes/Notes';
-import Candidates from '../pages/Candidates/Candidates';
+import Candidates from '../pages/Candidates/CandidatesList/CandidatesList';
 
 export const contentRoutes = [
   {

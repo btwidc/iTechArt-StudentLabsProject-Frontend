@@ -9,7 +9,7 @@ const Profile = () => {
   return (
     <div className="profile-info-container">
       <div className="profile-info-header">
-      <h2>Profile</h2>
+        <h2>Profile</h2>
       </div>
       <ProfileRow labelName="Name:" rowInfo={userProfileInfo.name} />
       <ProfileRow labelName="Surname:" rowInfo={userProfileInfo.surname} />
