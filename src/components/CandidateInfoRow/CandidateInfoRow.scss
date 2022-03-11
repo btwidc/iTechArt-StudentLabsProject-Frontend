@@ -1,21 +1,20 @@
-.profile-info-row {
+.candidate-info-row {
   display: flex;
   width: 100%;
   height: 8%;
   margin-bottom: 15px;
 
-  .profile-info-label {
+  .candidate-info-label {
     display: flex;
     min-width: 35%;
 
     @media screen and (max-width: 1080px) {
-        margin-right: 10px;
-        min-width: auto;
+      margin-right: 10px;
+      min-width: auto;
     }
-
   }
 
-  .profile-info-content {
+  .candidate-info-content {
     display: flex;
   }
 }

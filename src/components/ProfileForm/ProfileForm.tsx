@@ -6,9 +6,9 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
 import Input from '../../components/Input/Input';
-import './ProfileInfo.scss';
+import './ProfileForm.scss';
 
-const ProfileInfo = () => {
+const ProfileForm = () => {
   const dispatch = useDispatch();
 
   const isLoading = useTypedSelector((state) => state.user.loading);
@@ -55,7 +55,7 @@ const ProfileInfo = () => {
               labelName="Name"
               type="text"
               id="name"
-              placeholder="Type your name"
+              placeholder="Name"
               value={profileFormState.name}
               onChange={handleChange}
             />
@@ -64,7 +64,7 @@ const ProfileInfo = () => {
               labelName="Surname"
               type="text"
               id="surname"
-              placeholder="Type your surname"
+              placeholder="Surname"
               value={profileFormState.surname}
               onChange={handleChange}
             />
@@ -73,7 +73,7 @@ const ProfileInfo = () => {
               labelName="E-mail"
               type="text"
               id="email"
-              placeholder="Type your email"
+              placeholder="Email"
               value={profileFormState.email}
               onChange={handleChange}
             />
@@ -82,7 +82,7 @@ const ProfileInfo = () => {
               labelName="Skype"
               type="text"
               id="skype"
-              placeholder="Type your skype"
+              placeholder="Skype"
               value={profileFormState.skype}
               onChange={handleChange}
             />
@@ -91,7 +91,7 @@ const ProfileInfo = () => {
               labelName="Age experience"
               type="number"
               id="ageExperience"
-              placeholder="Type your age experience"
+              placeholder="Age experience"
               value={profileFormState.ageExperience.toString()}
               onChange={handleChange}
             />
@@ -100,7 +100,7 @@ const ProfileInfo = () => {
               labelName="Department"
               type="text"
               id="department"
-              placeholder="Type your department"
+              placeholder="Department"
               value={profileFormState.department}
               onChange={handleChange}
             />
@@ -109,7 +109,7 @@ const ProfileInfo = () => {
               labelName="Summary"
               type="text"
               id="summary"
-              placeholder="Type something about yourself"
+              placeholder="Summary"
               value={profileFormState.summary}
               onChange={handleChange}
             />
@@ -128,4 +128,4 @@ const ProfileInfo = () => {
   );
 };
 
-export default ProfileInfo;
+export default ProfileForm;

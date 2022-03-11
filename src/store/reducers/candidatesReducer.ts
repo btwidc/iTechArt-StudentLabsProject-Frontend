@@ -1,18 +1,20 @@
 import {
   CandidatesState,
   CandidatesActionsTypes,
-  CandidatesActions,
+  GetCandidatesActions,
+  AddCandidateActions,
 } from '../../types/candidatesActionsTypes/candidatesActionsTypes';
 
 const initialCandidatesState: CandidatesState = {
   message: '',
   loading: false,
   candidates: [],
+  candidate: null,
 };
 
 export const candidatesReducer = (
   state = initialCandidatesState,
-  action: CandidatesActions,
+  action: GetCandidatesActions | AddCandidateActions,
 ): CandidatesState => {
   switch (action.type) {
     case CandidatesActionsTypes.GET_CANDIDATES_LIST_ACTION:
@@ -32,7 +34,26 @@ export const candidatesReducer = (
         ...state,
         message: 'Successfully got list of candidates',
         loading: false,
-        candidates: action ?.payload,
+        candidates: action?.payload,
+      };
+    case CandidatesActionsTypes.ADD_CANDIDATE_ACTION:
+      return {
+        ...state,
+        message: 'Adding candidate...',
+        loading: true,
+      };
+    case CandidatesActionsTypes.ADD_CANDIDATE_FAILED:
+      return {
+        ...state,
+        message: 'Error during adding candidate',
+        loading: false,
+      };
+    case CandidatesActionsTypes.ADD_CANDIDATE_SUCCESS:
+      return {
+        ...state,
+        message: 'Candidate successfully added',
+        loading: false,
+        ...action?.payload,
       };
     default:
       return state;

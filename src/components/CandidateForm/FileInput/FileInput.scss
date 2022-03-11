@@ -1,0 +1,20 @@
+.file-input-container {
+  width: 45%;
+  margin-bottom: 20px;
+
+  .file-input-title {
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--text-font-family);
+    color: var(--title-color);
+  }
+
+  .file-input {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--text-font-family);
+    color: var(--title-color);
+  }
+}

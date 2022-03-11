@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import ProfileRow from './ProfileRow/ProfileRow';
+import ProfileRow from '../../components/ProfileRow/ProfileRow';
 import './Profile.scss';
 
 const Profile = () => {
@@ -15,8 +15,14 @@ const Profile = () => {
       <ProfileRow labelName="Surname:" rowInfo={userProfileInfo.surname} />
       <ProfileRow labelName="Email:" rowInfo={userProfileInfo.email} />
       <ProfileRow labelName="Skype:" rowInfo={userProfileInfo.skype} />
-      <ProfileRow labelName="Department:" rowInfo={userProfileInfo.department} />
-      <ProfileRow labelName="Experience:" rowInfo={userProfileInfo.ageExperience} />
+      <ProfileRow
+        labelName="Department:"
+        rowInfo={userProfileInfo.department}
+      />
+      <ProfileRow
+        labelName="Experience:"
+        rowInfo={userProfileInfo.ageExperience}
+      />
       <ProfileRow labelName="Summary:" rowInfo={userProfileInfo.summary} />
     </div>
   );
