@@ -6,7 +6,6 @@ import {
   AddCandidateActions,
 } from '../../types/candidatesActionsTypes/candidatesActionsTypes';
 
-import { CandidateFormInfo } from '../../types/candidateTypes/CandidateFormInfo';
 import CandidatesService from '../../services/CandidatesService';
 
 export const getCandidatesListAction = () => {
