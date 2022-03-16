@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../routes/routesPath';
 
@@ -13,7 +13,7 @@ import Input from '../../components/Input/Input';
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
 import './Auth.scss';
 
-const Auth = () => {
+const Auth: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 

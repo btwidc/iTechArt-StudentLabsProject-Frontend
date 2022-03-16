@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { addProfileInfo } from '../../store/actions/userActions';
@@ -8,7 +8,7 @@ import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation
 import Input from '../../components/Input/Input';
 import './ProfileForm.scss';
 
-const ProfileForm = () => {
+const ProfileForm: FC = () => {
   const dispatch = useDispatch();
 
   const isLoading = useTypedSelector((state) => state.user.loading);

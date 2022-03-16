@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { contentRoutes } from '../../../routes/routes';
 
@@ -9,7 +9,7 @@ import { MdLogout } from 'react-icons/md';
 
 import './NavList.scss';
 
-const NavList = () => {
+const NavList: FC = () => {
   const dispatch = useDispatch();
 
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {

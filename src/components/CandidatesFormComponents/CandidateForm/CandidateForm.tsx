@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { addCandidateAction } from '../../store/actions/candidatesActions';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { addCandidateAction } from '../../../store/actions/candidatesActions';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-import { ToggleModalProps } from '../../types/propsTypes/ToggleModalProps';
-
-import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
-import Input from '../../components/Input/Input';
-import FileInput from './FileInput/FileInput';
+import LoadingAnimation from '../../LoadingAnimation/LoadingAnimation';
+import Input from '../../Input/Input';
+import FileInput from '../../CandidatesFormComponents/CandidateForm/FileInput/FileInput';
 import './CandidateForm.scss';
 
-const CandidateForm = ({ toggleModal }: ToggleModalProps) => {
+interface ToggleModalProps {
+  toggleModal: () => void;
+}
+
+const initialFormState = {
+  name: '',
+  surname: '',
+  email: '',
+  skype: '',
+  phone: '',
+  education: '',
+  technology: '',
+};
+
+const CandidateForm: FC<ToggleModalProps> = ({ toggleModal }) => {
   const dispatch = useDispatch();
 
   const isLoading = useTypedSelector((state) => state.user.loading);
 
-  const [candidateFormState, setCandidateFormState] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    skype: '',
-    phone: '',
-    education: '',
-    technology: '',
-  });
+  const [candidateFormState, setCandidateFormState] =
+    useState(initialFormState);
 
   const [cvState, setCvState] = useState<File>();
 
@@ -38,33 +43,26 @@ const CandidateForm = ({ toggleModal }: ToggleModalProps) => {
   const fileSelectedHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
-    const files = (e.target as HTMLInputElement).files;
-    if (files && files.length > 0) {
-      setCvState(files[0]);
+    if (!e.target?.files?.length) {
+      return;
     }
+    const { files } = e.target;
+    setCvState(files[0]);
   };
 
   const handleAddProfileInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append('name', candidateFormState.name);
-    formData.append('surname', candidateFormState.surname);
-    formData.append('email', candidateFormState.email);
-    formData.append('skype', candidateFormState.skype);
-    formData.append('phone', candidateFormState.phone);
-    formData.append('education', candidateFormState.education);
-    formData.append('technology', candidateFormState.technology);
-    formData.append('cv', cvState as File);
-    dispatch(addCandidateAction(formData));
-    setCandidateFormState({
-      name: '',
-      surname: '',
-      email: '',
-      skype: '',
-      phone: '',
-      education: '',
-      technology: '',
-    });
+    const profileFormData = new FormData();
+    profileFormData.append('name', candidateFormState.name);
+    profileFormData.append('surname', candidateFormState.surname);
+    profileFormData.append('email', candidateFormState.email);
+    profileFormData.append('skype', candidateFormState.skype);
+    profileFormData.append('phone', candidateFormState.phone);
+    profileFormData.append('education', candidateFormState.education);
+    profileFormData.append('technology', candidateFormState.technology);
+    profileFormData.append('cv', cvState as File);
+    dispatch(addCandidateAction(profileFormData));
+    setCandidateFormState(initialFormState);
     toggleModal();
   };
 

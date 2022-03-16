@@ -14,9 +14,17 @@ export default class CandidatesService {
     });
   }
 
-  static async getCandidatesList(): Promise<
-    AxiosResponse<Array<ICandidateInfo>>
-    > {
-    return api.get<Array<ICandidateInfo>>('/candidate/list');
+  static async getCandidatesList(): Promise<AxiosResponse<ICandidateInfo[]>> {
+    return api.get<ICandidateInfo[]>('/candidate/list');
+  }
+
+  static async getCandidateInfo(
+    id: string,
+  ): Promise<AxiosResponse<ICandidateInfo>> {
+    return api.get<ICandidateInfo>(`candidate/info/${id}`);
+  }
+
+  static async downloadCandidateCv(id: string): Promise<AxiosResponse<Blob>> {
+    return api.get<Blob>(`candidate/download/${id}`, { responseType: 'blob' });
   }
 }

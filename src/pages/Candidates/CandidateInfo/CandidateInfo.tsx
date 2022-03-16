@@ -1,30 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
 import { useDispatch } from 'react-redux';
-import { getCandidatesListAction } from '../../../store/actions/candidatesActions';
+import {
+  downloadCandidateCvAction,
+  getCandidateAction,
+} from '../../../store/actions/candidatesActions';
 
-import CandidateInfoRow from '../../../components/CandidateInfoRow/CandidateInfoRow';
+import CandidatesList from '../CandidatesList/CandidatesList';
+import CandidateInfoRow from '../../../components/CandidatesFormComponents/CandidateInfoRow/CandidateInfoRow';
+import CandidateCvRow from '../../../components/CandidatesFormComponents/CandidateCvRow/CandidateCvRow';
+import LoadingAnimation from '../../../components/LoadingAnimation/LoadingAnimation';
 import './CandidateInfo.scss';
 
-const Candidates = () => {
+const CandidateInfo: FC = () => {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  const candidatesList = useTypedSelector(
-    (state) => state.candidates.candidates,
-  );
-  const candidate = candidatesList?.find(
-    (candidate) => candidate.id.toString() === id,
-  );
+
+  const { loading, candidate } = useTypedSelector((state) => state.candidates);
 
   useEffect(() => {
-    dispatch(getCandidatesListAction());
-  }, [dispatch]);
+    if (id) {
+      dispatch(getCandidateAction(id));
+    }
+  }, [dispatch, id]);
+
+  if (!candidate) {
+    return <CandidatesList />;
+  }
+
+  const downloadCvHandler = () => {
+    if (id) {
+      dispatch(downloadCandidateCvAction(id));
+    }
+  };
 
   return (
-    <div className="candidate-info-container">
+    <div
+      className="candidate-info-container"
+      style={{ opacity: loading ? 0.5 : 1 }}>
+      {loading && <LoadingAnimation />}
       <CandidateInfoRow labelName="Name:" rowInfo={candidate?.name} />
       <CandidateInfoRow labelName="Surname:" rowInfo={candidate?.surname} />
       <CandidateInfoRow labelName="Email:" rowInfo={candidate?.email} />
@@ -35,8 +52,9 @@ const Candidates = () => {
         labelName="Technology:"
         rowInfo={candidate?.technology}
       />
+      <CandidateCvRow labelName={'CV:'} downloadFunction={downloadCvHandler} />
     </div>
   );
 };
 
-export default Candidates;
+export default CandidateInfo;

@@ -16,5 +16,12 @@
 
   .candidate-info-content {
     display: flex;
+
+      @media screen and (max-width: 1080px) {
+        .download-button {
+          padding: 10px 25px;
+          font-size: 15px;
+        }
+    }
   }
 }

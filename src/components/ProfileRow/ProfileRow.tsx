@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './ProfileRow.scss';
 
@@ -7,7 +7,7 @@ interface ProfileRowProps {
   rowInfo: string | number;
 }
 
-const ProfileRow = ({ labelName, rowInfo }: ProfileRowProps) => {
+const ProfileRow: FC<ProfileRowProps> = ({ labelName, rowInfo }) => {
   return (
     <div className="profile-info-row">
       <h3 className="profile-info-label">{labelName}</h3>

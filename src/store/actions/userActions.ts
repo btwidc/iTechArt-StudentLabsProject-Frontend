@@ -15,17 +15,18 @@ export const loginAuthAction = (formState: IUserAuth) => {
       dispatch({
         type: UserAuthActionsTypes.LOGIN_ACTION,
       });
-      const response = await AuthService.login(formState);
-      localStorage.setItem('accessToken', response.data.accessToken);
-      localStorage.setItem('refreshToken', response.data.refreshToken);
+      const userInfo = await AuthService.login(formState);
+      localStorage.setItem('accessToken', userInfo.data.accessToken);
+      localStorage.setItem('refreshToken', userInfo.data.refreshToken);
       dispatch({
         type: UserAuthActionsTypes.LOGIN_SUCCESS,
-        payload: response.data,
+        payload: userInfo.data,
       });
+      const userId = userInfo.data.user.id.toString();
       dispatch({
         type: UserAuthActionsTypes.GET_PROFILE_INFO_ACTION,
       });
-      const isSetProfile = await AuthService.getProfileInfo();
+      const isSetProfile = await AuthService.getProfileInfo(userId);
       dispatch({
         type: UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS,
         payload: isSetProfile.data,
@@ -50,19 +51,19 @@ export const registerAuthAction = (formState: IUserAuth) => {
       dispatch({
         type: UserAuthActionsTypes.REGISTER_ACTION,
       });
-      const response = await AuthService.registration(formState);
-      localStorage.setItem('accessToken', response.data.accessToken);
-      localStorage.setItem('refreshToken', response.data.refreshToken);
+      const userInfo = await AuthService.registration(formState);
+      localStorage.setItem('accessToken', userInfo.data.accessToken);
+      localStorage.setItem('refreshToken', userInfo.data.refreshToken);
       dispatch({
         type: UserAuthActionsTypes.REGISTER_SUCCESS,
-        payload: response.data,
+        payload: userInfo.data,
       });
     } catch (e) {
       dispatch({
         type: UserAuthActionsTypes.REGISTER_FAILED,
       });
     }
-  }
+  };
 };
 
 export const logoutAuthAction = () => {
@@ -90,12 +91,13 @@ export const checkAuthAction = () => {
         type: UserAuthActionsTypes.REFRESH_ACTION,
       });
       const refreshToken = localStorage.getItem('refreshToken');
-      const response = await AuthService.refresh(refreshToken);
-      localStorage.setItem('accessToken', response.data);
-      const isSetProfile = await AuthService.getProfileInfo();
+      const refreshResponse = await AuthService.refresh(refreshToken);
+      localStorage.setItem('accessToken', refreshResponse.data.newAccessToken);
+      const userId = refreshResponse.data.user.id.toString();
+      const profileInfo = await AuthService.getProfileInfo(userId);
       dispatch({
         type: UserAuthActionsTypes.REFRESH_SUCCESS,
-        payload: isSetProfile.data,
+        payload: profileInfo.data,
       });
     } catch (e) {
       dispatch({
@@ -105,25 +107,27 @@ export const checkAuthAction = () => {
   };
 };
 
-export const addProfileInfo = (
-  profileFormState: IUserProfileInfo,
-) => {
+export const addProfileInfo = (profileFormState: IUserProfileInfo) => {
   return async (dispatch: Dispatch<UserAuthActions>) => {
     try {
       dispatch({
         type: UserAuthActionsTypes.ADD_PROFILE_INFO_ACTION,
       });
-      await AuthService.addProfileInfo(profileFormState);
+      const profileFormInfo = await AuthService.addProfileInfo(
+        profileFormState,
+      );
       dispatch({
         type: UserAuthActionsTypes.ADD_PROFILE_INFO_SUCCESS,
+        payload: profileFormInfo.data,
       });
+      const userId = profileFormInfo.data.userId.toString();
       dispatch({
         type: UserAuthActionsTypes.GET_PROFILE_INFO_ACTION,
       });
-      const isSetProfile = await AuthService.getProfileInfo();
+      const profileInfo = await AuthService.getProfileInfo(userId);
       dispatch({
         type: UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS,
-        payload: isSetProfile.data,
+        payload: profileInfo.data,
       });
     } catch (e: any) {
       if (e.response.status === 400) {
@@ -135,6 +139,25 @@ export const addProfileInfo = (
           type: UserAuthActionsTypes.ADD_PROFILE_INFO_FAILED,
         });
       }
+    }
+  };
+};
+
+export const getProfileInfo = (id: string) => {
+  return async (dispatch: Dispatch<UserAuthActions>) => {
+    try {
+      dispatch({
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_ACTION,
+      });
+      const profileInfo = await AuthService.getProfileInfo(id);
+      dispatch({
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS,
+        payload: profileInfo.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: UserAuthActionsTypes.GET_PROFILE_INFO_FAILED,
+      });
     }
   };
 };

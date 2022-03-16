@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 import './ProfileMainInfo.scss';
 
-const ProfileMainInfo = () => {
-  const userInfo = useTypedSelector((state) => state.user);
+const ProfileMainInfo: FC = () => {
+  const { name, surname, email } = useTypedSelector((state) => state.user);
+  const userFullName = `${name} ${surname}`;
+
   return (
     <div className="profile-main-info-container">
-      <h3>{userInfo.name + " " + userInfo.surname}</h3>
-      <h4>{userInfo.email}</h4>
+      <h3>{userFullName}</h3>
+      <h4>{email}</h4>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './CandidateInfoRow.scss';
 
@@ -7,7 +7,10 @@ interface CandidateInfoRowProps {
   rowInfo: string | undefined;
 }
 
-const CandidateInfoRow = ({ labelName, rowInfo }: CandidateInfoRowProps) => {
+const CandidateInfoRow: FC<CandidateInfoRowProps> = ({
+  labelName,
+  rowInfo,
+}) => {
   return (
     <div className="candidate-info-row">
       <h3 className="candidate-info-label">{labelName}</h3>

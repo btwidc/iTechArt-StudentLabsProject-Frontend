@@ -23,8 +23,11 @@ api.interceptors.response.use(
       isRetry = true;
       try {
         const refreshToken = localStorage.getItem('refreshToken');
-        const response = await AuthService.refresh(refreshToken);
-        localStorage.setItem('accessToken', response.data);
+        const refreshResponse = await AuthService.refresh(refreshToken);
+        localStorage.setItem(
+          'accessToken',
+          refreshResponse.data.newAccessToken,
+        );
         isRetry = false;
         return api.request(originalRequest);
       } catch (e) {

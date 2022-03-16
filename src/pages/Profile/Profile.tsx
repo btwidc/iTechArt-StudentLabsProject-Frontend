@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getProfileInfo } from '../../store/actions/userActions';
 
 import ProfileRow from '../../components/ProfileRow/ProfileRow';
 import './Profile.scss';
 
-const Profile = () => {
+const Profile: FC = () => {
+  const dispatch = useDispatch();
+
+  const { id } = useParams();
   const userProfileInfo = useTypedSelector((state) => state.user);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getProfileInfo(id));
+    }
+  }, [dispatch, id]);
+
   return (
     <div className="profile-info-container">
       <div className="profile-info-header">

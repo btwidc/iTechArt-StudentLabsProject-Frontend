@@ -6,7 +6,7 @@ interface ChildrenProps {
   children?: ReactNode;
 }
 
-const SidebarExtension: FC = ({ children }: ChildrenProps) => {
+const SidebarExtension: FC<ChildrenProps> = ({ children }) => {
   const sidebarElement = document.getElementById('sidebar-extension');
 
   return sidebarElement ? (

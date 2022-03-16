@@ -83,6 +83,7 @@ export const userAuthReducer = (
         ...state,
         isLoggedIn: false,
         loading: false,
+        isSetProfileInfo: false,
         message: 'Successfully logout',
       };
     case UserAuthActionsTypes.REFRESH_ACTION:
@@ -134,6 +135,7 @@ export const userAuthReducer = (
         isSetProfileInfo: true,
         loading: false,
         message: 'Successfully add profile info',
+        ...action?.payload,
       };
     case UserAuthActionsTypes.GET_PROFILE_INFO_ACTION:
       return {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './Input.scss';
 
@@ -12,7 +12,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({
+const Input: FC<InputProps> = ({
   className,
   labelName,
   type,
@@ -20,7 +20,7 @@ const Input = ({
   placeholder,
   value,
   onChange,
-}: InputProps) => {
+}) => {
   return (
     <div className={className}>
       <label htmlFor={id} className="auth-form-item-title">

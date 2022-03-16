@@ -4,6 +4,7 @@ import { AxiosResponse } from 'axios';
 import { AuthResponse } from '../types/authTypes/responses/AuthResponse';
 import { IUserProfileInfo } from '../types/authTypes/requests/IUserProfileInfo';
 import { UserProfileInfoResponse } from '../types/authTypes/responses/UserProfileInfoResponse';
+import { RefreshResponse } from '../types/authTypes/responses/RefreshResponse';
 
 export default class AuthService {
   static async login(user: IUserAuth): Promise<AxiosResponse<AuthResponse>> {
@@ -22,21 +23,21 @@ export default class AuthService {
 
   static async refresh(
     refreshToken: string | null,
-  ): Promise<AxiosResponse<string>> {
-    return api.post<string>('/user/refresh', {
+  ): Promise<AxiosResponse<RefreshResponse>> {
+    return api.post<RefreshResponse>('/user/refresh', {
       refreshToken,
     });
   }
 
   static async addProfileInfo(
     userInfo: IUserProfileInfo,
-  ): Promise<AxiosResponse<IUserProfileInfo>> {
-    return api.post<IUserProfileInfo>('/user/profile', userInfo);
+  ): Promise<AxiosResponse<UserProfileInfoResponse>> {
+    return api.post<UserProfileInfoResponse>('/user/profile', userInfo);
   }
 
-  static async getProfileInfo(): Promise<
-    AxiosResponse<UserProfileInfoResponse>
-    > {
-    return api.get<UserProfileInfoResponse>('/user/profile');
+  static async getProfileInfo(
+    id: string,
+  ): Promise<AxiosResponse<UserProfileInfoResponse>> {
+    return api.get<UserProfileInfoResponse>(`/user/profile/${id}`);
   }
 }

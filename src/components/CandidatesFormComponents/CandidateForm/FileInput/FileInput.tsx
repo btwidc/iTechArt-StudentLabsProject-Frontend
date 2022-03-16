@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './FileInput.scss';
 
@@ -9,7 +9,7 @@ interface FileInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FileInput = ({ className, id, type, name, onChange }: FileInputProps) => {
+const FileInput: FC<FileInputProps> = ({ id, type, name, onChange }) => {
   return (
     <div className="file-input-container">
       <label htmlFor={id} className="file-input-title">
