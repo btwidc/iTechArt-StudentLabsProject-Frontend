@@ -1,12 +1,12 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-interface NodesProps {
+interface PortalProps {
   children: ReactNode;
   root: HTMLElement;
 }
 
-const Portal: FC<NodesProps> = ({ children, root }) => {
+const Portal: FC<PortalProps> = ({ children, root }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

@@ -24,6 +24,10 @@ export default class CandidatesService {
     return api.get<ICandidateInfo>(`candidate/info/${id}`);
   }
 
+  static async deleteCandidate(id: string): Promise<AxiosResponse<number>> {
+    return api.delete<number>(`candidate/delete/${id}`);
+  }
+
   static async downloadCandidateCv(id: string): Promise<AxiosResponse<Blob>> {
     return api.get<Blob>(`candidate/download/${id}`, { responseType: 'blob' });
   }

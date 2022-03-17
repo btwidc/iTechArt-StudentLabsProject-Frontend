@@ -9,6 +9,7 @@ import {
 } from '../../../store/actions/candidatesActions';
 
 import CandidatesList from '../CandidatesList/CandidatesList';
+import CandidateInfoHeader from '../../../components/CandidatesListComponents/CandidateInfoHeader/CandidateInfoHeader';
 import CandidateInfoRow from '../../../components/CandidatesFormComponents/CandidateInfoRow/CandidateInfoRow';
 import CandidateCvRow from '../../../components/CandidatesFormComponents/CandidateCvRow/CandidateCvRow';
 import LoadingAnimation from '../../../components/LoadingAnimation/LoadingAnimation';
@@ -20,6 +21,7 @@ const CandidateInfo: FC = () => {
   const { id } = useParams();
 
   const { loading, candidate } = useTypedSelector((state) => state.candidates);
+  const cvName = candidate?.cvName;
 
   useEffect(() => {
     if (id) {
@@ -42,6 +44,7 @@ const CandidateInfo: FC = () => {
       className="candidate-info-container"
       style={{ opacity: loading ? 0.5 : 1 }}>
       {loading && <LoadingAnimation />}
+      <CandidateInfoHeader />
       <CandidateInfoRow labelName="Name:" rowInfo={candidate?.name} />
       <CandidateInfoRow labelName="Surname:" rowInfo={candidate?.surname} />
       <CandidateInfoRow labelName="Email:" rowInfo={candidate?.email} />
@@ -52,7 +55,12 @@ const CandidateInfo: FC = () => {
         labelName="Technology:"
         rowInfo={candidate?.technology}
       />
-      <CandidateCvRow labelName={'CV:'} downloadFunction={downloadCvHandler} />
+      {cvName !== null && (
+        <CandidateCvRow
+          labelName={'CV:'}
+          downloadFunction={downloadCvHandler}
+        />
+      )}
     </div>
   );
 };

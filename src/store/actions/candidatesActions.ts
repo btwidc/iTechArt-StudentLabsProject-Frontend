@@ -6,6 +6,7 @@ import {
   GetCandidateActions,
   AddCandidateActions,
   DownloadCandidateCvActions,
+  DeleteCandidateActions,
 } from '../../types/candidatesActionsTypes/candidatesActionsTypes';
 
 import CandidatesService from '../../services/CandidatesService';
@@ -76,6 +77,31 @@ export const addCandidateAction = (candidateFormState: any) => {
   };
 };
 
+export const deleteCandidateAction = (id: string) => {
+  return async (
+    dispatch: Dispatch<GetCandidatesActions | DeleteCandidateActions>,
+  ) => {
+    try {
+      dispatch({
+        type: CandidatesActionsTypes.DELETE_CANDIDATE_ACTION,
+      });
+      await CandidatesService.deleteCandidate(id);
+      dispatch({
+        type: CandidatesActionsTypes.DELETE_CANDIDATE_SUCCESS,
+      });
+      const candidatesList = await CandidatesService.getCandidatesList();
+      dispatch({
+        type: CandidatesActionsTypes.GET_CANDIDATES_LIST_SUCCESS,
+        payload: candidatesList.data,
+      });
+    } catch (e) {
+      dispatch({
+        type: CandidatesActionsTypes.DELETE_CANDIDATE_FAILED,
+      });
+    }
+  };
+};
+
 export const downloadCandidateCvAction = (id: string) => {
   return async (dispatch: Dispatch<DownloadCandidateCvActions>) => {
     try {
@@ -84,16 +110,20 @@ export const downloadCandidateCvAction = (id: string) => {
       });
       const candidateInfo = await CandidatesService.getCandidateInfo(id);
       const candidateCvName = candidateInfo.data.cvName;
-      const downloadResponse = await CandidatesService.downloadCandidateCv(id);
-      const downloadCv = downloadResponse.data;
-      const downloadUrl = window.URL.createObjectURL(downloadCv);
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = candidateCvName;
-      link.click();
-      dispatch({
-        type: CandidatesActionsTypes.DOWNLOAD_CANDIDATE_CV_SUCCESS,
-      });
+      if (candidateCvName !== null) {
+        const downloadResponse = await CandidatesService.downloadCandidateCv(
+          id,
+        );
+        const downloadCv = downloadResponse.data;
+        const downloadUrl = window.URL.createObjectURL(downloadCv);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = candidateCvName;
+        link.click();
+        dispatch({
+          type: CandidatesActionsTypes.DOWNLOAD_CANDIDATE_CV_SUCCESS,
+        });
+      }
     } catch (e) {
       dispatch({
         type: CandidatesActionsTypes.DOWNLOAD_CANDIDATE_CV_FAILED,

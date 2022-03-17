@@ -5,6 +5,7 @@ import {
   GetCandidateActions,
   AddCandidateActions,
   DownloadCandidateCvActions,
+  DeleteCandidateActions,
 } from '../../types/candidatesActionsTypes/candidatesActionsTypes';
 
 const initialCandidatesState: CandidatesState = {
@@ -20,6 +21,7 @@ export const candidatesReducer = (
     | GetCandidatesActions
     | GetCandidateActions
     | AddCandidateActions
+    | DeleteCandidateActions
     | DownloadCandidateCvActions,
 ): CandidatesState => {
   switch (action.type) {
@@ -79,6 +81,24 @@ export const candidatesReducer = (
         message: 'Candidate successfully added',
         loading: false,
         ...action?.payload,
+      };
+    case CandidatesActionsTypes.DELETE_CANDIDATE_ACTION:
+      return {
+        ...state,
+        message: 'Error during deleting candidate...',
+        loading: false,
+      };
+    case CandidatesActionsTypes.DELETE_CANDIDATE_FAILED:
+      return {
+        ...state,
+        message: 'Error during adding candidate',
+        loading: false,
+      };
+    case CandidatesActionsTypes.DELETE_CANDIDATE_SUCCESS:
+      return {
+        ...state,
+        message: 'Candidate successfully deleted',
+        loading: false,
       };
     case CandidatesActionsTypes.DOWNLOAD_CANDIDATE_CV_ACTION:
       return {
