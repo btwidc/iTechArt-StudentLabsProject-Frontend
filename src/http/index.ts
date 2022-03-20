@@ -12,15 +12,18 @@ api.interceptors.request.use((config: any) => {
   return config;
 });
 
-let isRetry = false;
 api.interceptors.response.use(
   (config) => {
     return config;
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !isRetry) {
-      isRetry = true;
+    if (
+      error.response.status === 401 &&
+      originalRequest &&
+      !originalRequest._isRetry
+    ) {
+      originalRequest._isRetry = true;
       try {
         const refreshToken = localStorage.getItem('refreshToken');
         const refreshResponse = await AuthService.refresh(refreshToken);
@@ -28,7 +31,6 @@ api.interceptors.response.use(
           'accessToken',
           refreshResponse.data.newAccessToken,
         );
-        isRetry = false;
         return api.request(originalRequest);
       } catch (e) {
         console.log('Not auth');
