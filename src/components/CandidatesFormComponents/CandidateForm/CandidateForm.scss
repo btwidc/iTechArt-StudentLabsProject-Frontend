@@ -1,0 +1,46 @@
+.candidates-info-page {
+  width: 100%;
+  margin: 0 auto;
+
+  .candidates-info-form-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+
+    .candidates-info-form {
+      position: relative;
+      overflow: hidden;
+      width: 900px;
+      background: inherit;
+    }
+  }
+}
+
+.candidates-info-form-content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .candidates-form-button-field {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 20px 0;
+    z-index: 1;
+
+    .candidates-form-button {
+      width: 60%;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: var(--text-font-family);
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import NavListContainer from './NavListContainer/NavListContainer';
@@ -6,7 +6,7 @@ import NavList from './NavList/NavList';
 
 import './NavMenu.scss';
 
-const NavMenu = () => {
+const NavMenu: FC = () => {
   return (
     <div className="nav-container">
       <div className="nav-menu-container">

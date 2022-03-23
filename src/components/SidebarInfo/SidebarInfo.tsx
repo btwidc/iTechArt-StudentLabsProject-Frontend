@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 
+import ProfileMainInfo from '../../components/ProfileMainInfo/ProfileMainInfo';
 import './SidebarInfo.scss';
 
-const SidebarInfo = () => {
+const SidebarInfo: FC = () => {
   return (
     <div className="sidebar-info-container">
-      <h3>Sidebar</h3>
-      <div className="sidebar-extension" />
+      <ProfileMainInfo />
+      <div id="sidebar-extension" />
     </div>
   );
 };

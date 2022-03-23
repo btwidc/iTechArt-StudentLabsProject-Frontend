@@ -1,0 +1,25 @@
+.candidates-info-form-header {
+  display: flex;
+  padding: 10px;
+
+  .candidates-info-form-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--title-color);
+    font-size: 38px;
+    font-family: var(--text-font-family);
+    font-weight: 700;
+
+    @media screen and (max-width: 1080px) {
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .close-modal-button {
+    width: 10%;
+    height: 5%;
+  }
+}

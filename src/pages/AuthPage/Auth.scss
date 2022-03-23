@@ -1,18 +1,4 @@
-// Backgrounds
-$page-background: #ffffff;
-
-// Fonts
-$auth-form-font-family: 'Poppins', sans-serif;
-
-//Colors
-$auth-form-title-color: #333333;
-$auth-form-register-link-color: #666666;
-$auth-form-register-link-hover-color: #e61919;
-
-//Borders
-$auth-form-border: 2px solid #d9d9d9;
-
-.limiter {
+.auth-page {
     width: 100%;
     margin: 0 auto;
 }
@@ -25,7 +11,6 @@ $auth-form-border: 2px solid #d9d9d9;
     width: 100%;
     min-height: 100vh;
     padding: 15px;
-    background: $page-background;
 }
 
 .auth-form {
@@ -33,9 +18,13 @@ $auth-form-border: 2px solid #d9d9d9;
     overflow: hidden;
     width: 500px;
     padding: 30px 60px;
-    border: $auth-form-border;
+    border: var(--auth-form-border);
     border-radius: 10px;
-    background: $page-background;
+    background: inherit;
+
+    @media screen and (max-width: 1080px) {
+        padding: 20px 30px;
+    }
 }
 
 .auth-form-content {
@@ -45,11 +34,15 @@ $auth-form-border: 2px solid #d9d9d9;
 .auth-form-title {
     display: block;
     text-align: center;
-    padding-bottom: 40px;
-    color: $auth-form-title-color;
+    margin-bottom: 40px;
+    color: var(--title-color);
     font-size: 38px;
-    font-family: $auth-form-font-family;
+    font-family: var(--text-font-family);
     font-weight: 700;
+
+    @media screen and (max-width: 1080px) {
+        margin-bottom: 20px;
+    }
 }
 
 .auth-form-item {
@@ -65,13 +58,13 @@ $auth-form-border: 2px solid #d9d9d9;
 .auth-form-registration-link {
     font-size: 14px;
     font-weight: 300;
-    font-family: $auth-form-font-family;
+    font-family: var(--text-font-family);
     text-decoration: none;
-    color: $auth-form-register-link-color;
+    color: var(--auth-form-link-color);
 }
 
 .auth-form-registration-link:hover {
-    color: $auth-form-register-link-hover-color;
+    color: var(--auth-form-link-hover-color);
 }
 
 .auth-form-button-field {
@@ -92,7 +85,7 @@ $auth-form-border: 2px solid #d9d9d9;
     border-radius: 25px;
     font-size: 16px;
     font-weight: 500;
-    font-family: $auth-form-font-family;
+    font-family: var(--text-font-family);
     cursor: pointer;
     text-transform: uppercase;
 }

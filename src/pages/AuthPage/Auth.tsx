@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import React, { FC, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../routes/routesPath';
+
 import { useDispatch } from 'react-redux';
 import {
   loginAuthAction,
@@ -8,13 +9,12 @@ import {
 } from '../../store/actions/userActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import AuthInput from '../../components/AuthInput/AuthInput';
+import Input from '../../components/Input/Input';
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation';
 import './Auth.scss';
 
-const Auth = () => {
+const Auth: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
 
   const isLoading = useTypedSelector((state) => state.user.loading);
@@ -32,18 +32,18 @@ const Auth = () => {
 
   const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(loginAuthAction(formState, navigate));
+    dispatch(loginAuthAction(formState));
     setFormState({ email: '', password: '' });
   };
 
   const handleRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(registerAuthAction(formState, navigate));
+    dispatch(registerAuthAction(formState));
     setFormState({ email: '', password: '' });
   };
 
   return (
-    <div className="limiter">
+    <div className="auth-page">
       <div
         className="auth-form-container"
         style={{ opacity: isLoading ? 0.7 : 1 }}>
@@ -53,7 +53,8 @@ const Auth = () => {
             <span className="auth-form-title">
               {isRegistration ? 'Registration' : 'Login'}
             </span>
-            <AuthInput
+            <Input
+              className="auth-form-item"
               labelName="E-mail"
               type="text"
               id="email"
@@ -61,7 +62,8 @@ const Auth = () => {
               value={formState.email}
               onChange={handleChange}
             />
-            <AuthInput
+            <Input
+              className="auth-form-item"
               labelName="Password"
               type="password"
               id="password"

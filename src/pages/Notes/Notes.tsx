@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Notes.scss';
 
-const Notes = () => {
-    return <div>Notes</div>;
+const Notes: FC = () => {
+  return <div>Notes</div>;
 };
 
 export default Notes;

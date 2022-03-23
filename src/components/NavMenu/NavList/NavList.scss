@@ -55,7 +55,7 @@
     }
   }
 
-  button{
+  button {
     width: 70%;
     margin: 20px 10px;
     padding: 10px;
@@ -78,7 +78,7 @@
 }
 
 @media screen and (max-width: 1080px) {
-  .nav-list{
+  .nav-list {
     min-height: 60%;
     padding: 0;
 
@@ -103,6 +103,5 @@
     .divider {
       display: none;
     }
-
   }
 }

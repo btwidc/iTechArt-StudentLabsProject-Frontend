@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './ContentDescription.scss';
 
-const ContentDescription = () => {
+const ContentDescription: FC = () => {
   return (
     <div className="content-description-container">
       <div className="content-description">

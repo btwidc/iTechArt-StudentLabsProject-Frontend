@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './Events.scss';
 
-const Events = () => {
-    return <div>Events</div>;
+const Events: FC = () => {
+  return <div>Events</div>;
 };
 
 export default Events;
