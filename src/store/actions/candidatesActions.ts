@@ -89,6 +89,9 @@ export const deleteCandidateAction = (id: string) => {
       dispatch({
         type: CandidatesActionsTypes.DELETE_CANDIDATE_SUCCESS,
       });
+      dispatch({
+        type: CandidatesActionsTypes.GET_CANDIDATES_LIST_ACTION,
+      });
       const candidatesList = await CandidatesService.getCandidatesList();
       dispatch({
         type: CandidatesActionsTypes.GET_CANDIDATES_LIST_SUCCESS,
@@ -108,17 +111,12 @@ export const downloadCandidateCvAction = (id: string) => {
       dispatch({
         type: CandidatesActionsTypes.DOWNLOAD_CANDIDATE_CV_ACTION,
       });
-      const candidateInfo = await CandidatesService.getCandidateInfo(id);
-      const candidateCvName = candidateInfo.data.cvName;
-      if (candidateCvName !== null) {
-        const downloadResponse = await CandidatesService.downloadCandidateCv(
-          id,
-        );
-        const downloadCv = downloadResponse.data;
-        const downloadUrl = window.URL.createObjectURL(downloadCv);
+      const candidate = await CandidatesService.getCandidateInfo(id);
+      const candidateCvLink = candidate.data.cvLink;
+      if (candidateCvLink !== null) {
         const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = candidateCvName;
+        link.href = candidateCvLink;
+        link.download = candidateCvLink.split('/')[7];
         link.click();
         dispatch({
           type: CandidatesActionsTypes.DOWNLOAD_CANDIDATE_CV_SUCCESS,

@@ -21,7 +21,7 @@ const CandidateInfo: FC = () => {
   const { id } = useParams();
 
   const { loading, candidate } = useTypedSelector((state) => state.candidates);
-  const cvName = candidate?.cvName;
+  const cvLink = candidate?.cvLink;
 
   useEffect(() => {
     if (id) {
@@ -55,7 +55,7 @@ const CandidateInfo: FC = () => {
         labelName="Technology:"
         rowInfo={candidate?.technology}
       />
-      {cvName !== null && (
+      {cvLink !== null && (
         <CandidateCvRow
           labelName={'CV:'}
           downloadFunction={downloadCvHandler}

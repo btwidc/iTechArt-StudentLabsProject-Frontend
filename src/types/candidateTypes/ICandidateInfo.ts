@@ -7,5 +7,5 @@ export interface ICandidateInfo {
   phone: string;
   education: string;
   technology: string;
-  cvName: string | null;
+  cvLink: string | null;
 }
