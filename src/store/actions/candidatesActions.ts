@@ -7,7 +7,7 @@ import {
   AddCandidateActions,
   DownloadCandidateCvActions,
   DeleteCandidateActions,
-} from '../../types/candidatesActionsTypes/candidatesActionsTypes';
+} from '../../types/actionsTypes/candidatesActionsTypes/candidatesActionsTypes';
 
 import CandidatesService from '../../services/CandidatesService';
 

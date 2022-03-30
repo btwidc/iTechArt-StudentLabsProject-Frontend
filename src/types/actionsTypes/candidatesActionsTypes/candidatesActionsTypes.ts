@@ -1,4 +1,4 @@
-import { ICandidateInfo } from '../candidateTypes/ICandidateInfo';
+import { ICandidateInfo } from '../../candidateTypes/ICandidateInfo';
 
 export interface CandidatesState {
   message: string;

@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import {
   UserAuthActions,
   UserAuthActionsTypes,
-} from '../../types/userActionsTypes/userAuthActionsTypes';
+} from '../../types/actionsTypes/userActionsTypes/userAuthActionsTypes';
 
 import AuthService from '../../services/AuthService';
 import { IUserAuth } from '../../types/authTypes/requests/IUserAuth';

@@ -10,7 +10,7 @@ import { MdEvent } from 'react-icons/md';
 import { IoMdPeople } from 'react-icons/io';
 
 import Profile from '../pages/Profile/Profile';
-import Events from '../pages/Events/Events';
+import EventsList from '../pages/Events/EventsList/EventsList';
 import Notes from '../pages/Notes/Notes';
 import CandidatesList from '../pages/Candidates/CandidatesList/CandidatesList';
 
@@ -24,7 +24,7 @@ export const contentRoutes = [
   },
   {
     path: EVENTS_ROUTE,
-    Component: Events,
+    Component: EventsList,
     title: 'Events',
     icon: <MdEvent />,
     className: 'nav-item',
