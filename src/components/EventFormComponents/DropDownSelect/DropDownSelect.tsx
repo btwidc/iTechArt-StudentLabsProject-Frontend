@@ -1,38 +1,75 @@
-import React, { FC } from 'react';
-import Select, { SingleValue } from 'react-select';
+import React, { CSSProperties, FC } from 'react';
+import Select, { StylesConfig, SingleValue } from 'react-select';
 
 import './DropDownSelect.scss';
 
-export interface Participant {
+export type SelectType = {
   label: string;
   value: string;
-}
-export interface ParticipantSelectState {
-  selectedParticipant: Participant | null;
-}
+};
 
-export interface Candidate {
-  label: string;
-  value: string;
-}
-export interface CandidateSelectState {
-  selectedCandidate: Candidate | null;
-}
+export type SelectState = {
+  selectedOption: SelectType | null | undefined;
+};
 
-export interface Category {
-  label: string;
-  value: string;
-}
-export interface CategorySelectState {
-  selectedCategory: Category | null;
-}
+const customContainerStyles: CSSProperties = {
+  height: 45,
+  border: '2px solid #9f9f9fff',
+  borderRadius: 4,
+  fontSize: 18,
+};
+
+const customOptionStyles: CSSProperties = {
+  color: '#000000',
+};
+
+const customOptionFocusStyles: CSSProperties = {
+  color: '#000000',
+  background: '#ffabab',
+};
+
+const customOptionSelectStyles: CSSProperties = {
+  color: '#000000',
+  background: '#fd8484',
+};
+
+const selectStyle: StylesConfig<SelectType, false> = {
+  control: (base) => ({
+    ...base,
+    border: 0,
+    boxShadow: 'none',
+  }),
+  container: (provided, state) => {
+    return {
+      ...provided,
+      ...customContainerStyles,
+    };
+  },
+  option: (provided, state) => {
+    if (state.isFocused) {
+      return {
+        ...provided,
+        ...customOptionFocusStyles,
+      };
+    } else if (state.isSelected) {
+      return {
+        ...provided,
+        ...customOptionSelectStyles,
+      };
+    }
+    return {
+      ...provided,
+      ...customOptionStyles,
+    };
+  },
+};
 
 interface DropDownSelectProps {
   label: string;
   placeholder: string;
-  values: Participant[] | Candidate[] | Category[] | undefined;
-  selectedValue: Participant | Candidate | Category | null | undefined;
-  setValue: (option: SingleValue<Participant | Candidate | Category>) => void;
+  values: SelectType[] | undefined;
+  selectedValue: SelectType | null | undefined;
+  setValue: (option: SingleValue<SelectType>) => void;
 }
 
 const DropDownSelect: FC<DropDownSelectProps> = ({
@@ -46,6 +83,7 @@ const DropDownSelect: FC<DropDownSelectProps> = ({
     <div className="drop-down-select-container">
       <label className="drop-down-select-label">{label}</label>
       <Select
+        styles={selectStyle}
         isClearable={true}
         placeholder={placeholder}
         value={selectedValue}

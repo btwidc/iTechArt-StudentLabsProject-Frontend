@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { SingleValue } from 'react-select';
+
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useSelectInputField } from '../../../hooks/useSelectInputField';
 
 import { useNavigate } from 'react-router-dom';
 import { EVENTS_ROUTE } from '../../../routes/routesPath';
@@ -11,20 +12,25 @@ import { getCandidatesListAction } from '../../../store/actions/candidatesAction
 import { getCategoriesListAction } from '../../../store/actions/categoriesActions';
 import { addEventAction } from '../../../store/actions/eventsActions';
 
-import DropDownSelect, {
-  Participant,
-  ParticipantSelectState,
-  Candidate,
-  CandidateSelectState,
-  Category,
-  CategorySelectState,
-} from '../DropDownSelect/DropDownSelect';
-
 import EventsFormHeader from '../EventFormHeader/EventFormHeader';
 import DateTimePickerSelect from '../DateTimePickerSelect/DateTimePickerSelect';
+import DropDownSelect from '../DropDownSelect/DropDownSelect';
 import './EventForm.scss';
 
 const EventForm = () => {
+  const { profiles, candidates, categories } = useTypedSelector(
+    (state) => state,
+  );
+
+  const [selectedDate, setDate] = useState<Date | null>(new Date());
+
+  const [selectedParticipant, setSelectedParticipant] =
+    useSelectInputField(null);
+
+  const [selectedCandidate, setSelectedCandidate] = useSelectInputField(null);
+
+  const [selectedCategory, setSelectedCategory] = useSelectInputField(null);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,67 +40,33 @@ const EventForm = () => {
     dispatch(getCategoriesListAction());
   }, [dispatch]);
 
-  const { profiles } = useTypedSelector((state) => state.profiles);
-  const { candidates } = useTypedSelector((state) => state.candidates);
-  const { categories } = useTypedSelector((state) => state.categories);
-
-  const [selectedDate, setDate] = useState<Date | null>(new Date());
-
-  const participantsList: Participant[] | undefined = profiles?.map(
-    (profile) => ({
-      label: `${profile.name} ${profile.surname} (${profile.email})`,
-      value: `${profile.name} ${profile.surname} (${profile.email})`,
+  const participantsList = profiles.profiles?.map(
+    ({ name, surname, email }) => ({
+      label: `${name} ${surname} (${email})`,
+      value: `${name} ${surname} (${email})`,
     }),
   );
 
-  const [selectedParticipant, setParticipant] =
-    React.useState<ParticipantSelectState>();
-
-  const handleParticipantSelect = (option: SingleValue<Participant>) => {
-    setParticipant({
-      selectedParticipant: option,
-    });
-  };
-
-  const candidatesList: Candidate[] | undefined = candidates?.map(
-    (candidate) => ({
-      label: `${candidate.name} ${candidate.surname} (${candidate.email})`,
-      value: `${candidate.name} ${candidate.surname} (${candidate.email})`,
+  const candidatesList = candidates.candidates?.map(
+    ({ name, surname, email }) => ({
+      label: `${name} ${surname} (${email})`,
+      value: `${name} ${surname} (${email})`,
     }),
   );
 
-  const [selectedCandidate, setCandidate] =
-    React.useState<CandidateSelectState>();
-
-  const handleCandidateSelect = (option: SingleValue<Candidate>) => {
-    setCandidate({
-      selectedCandidate: option,
-    });
-  };
-
-  const categoriesList: Category[] | undefined = categories?.map(
-    (category) => ({
-      label: `${category.name}`,
-      value: `${category.name}`,
-    }),
-  );
-
-  const [selectedCategory, setCategory] = React.useState<CategorySelectState>();
-
-  const handleCategorySelect = (option: SingleValue<Category>) => {
-    setCategory({
-      selectedCategory: option,
-    });
-  };
+  const categoriesList = categories.categories?.map(({ name }) => ({
+    label: `${name}`,
+    value: `${name}`,
+  }));
 
   const handleAddEvent = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(
       addEventAction(
         selectedDate?.toLocaleString(),
-        selectedParticipant?.selectedParticipant?.value,
-        selectedCandidate?.selectedCandidate?.value,
-        selectedCategory?.selectedCategory?.value,
+        selectedParticipant?.selectedOption?.value,
+        selectedCandidate?.selectedOption?.value,
+        selectedCategory?.selectedOption?.value,
       ),
     );
     navigate(EVENTS_ROUTE);
@@ -113,22 +85,22 @@ const EventForm = () => {
           label="Participant"
           placeholder="Choose participant"
           values={participantsList}
-          selectedValue={selectedParticipant?.selectedParticipant}
-          setValue={handleParticipantSelect}
+          selectedValue={selectedParticipant?.selectedOption}
+          setValue={setSelectedParticipant}
         />
         <DropDownSelect
           label="Candidate"
           placeholder="Choose candidate"
           values={candidatesList}
-          selectedValue={selectedCandidate?.selectedCandidate}
-          setValue={handleCandidateSelect}
+          selectedValue={selectedCandidate?.selectedOption}
+          setValue={setSelectedCandidate}
         />
         <DropDownSelect
           label="Category"
           placeholder="Choose category"
           values={categoriesList}
-          selectedValue={selectedCategory?.selectedCategory}
-          setValue={handleCategorySelect}
+          selectedValue={selectedCategory?.selectedOption}
+          setValue={setSelectedCategory}
         />
         <button type="submit" onClick={handleAddEvent}>
           Add event

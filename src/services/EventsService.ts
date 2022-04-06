@@ -2,7 +2,6 @@ import api from '../http/index';
 import { AxiosResponse } from 'axios';
 
 import { EventInfo } from '../types/eventTypes/EventInfo';
-import { IEventForm } from '../types/eventTypes/IEventForm';
 
 export default class EventsService {
   static async getEventsList(): Promise<AxiosResponse<EventInfo[]>> {
@@ -14,10 +13,10 @@ export default class EventsService {
   }
 
   static async addEvent(
-    date: string | undefined,
-    participantFullName: string | undefined,
-    candidateFullName: string | undefined,
-    categoryName: string | undefined,
+    date?: string,
+    participantFullName?: string,
+    candidateFullName?: string,
+    categoryName?: string,
   ): Promise<AxiosResponse<EventInfo>> {
     return api.post<EventInfo>(`event/add`, {
       date,

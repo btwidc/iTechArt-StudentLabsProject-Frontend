@@ -11,11 +11,11 @@ import LoadingAnimation from '../../../components/LoadingAnimation/LoadingAnimat
 import './EventInfo.scss';
 
 const EventInfo: FC = () => {
+  const { loading, event } = useTypedSelector((state) => state.events);
+
   const dispatch = useDispatch();
 
   const { id } = useParams();
-
-  const { loading, event } = useTypedSelector((state) => state.events);
 
   useEffect(() => {
     if (id) {
@@ -27,7 +27,11 @@ const EventInfo: FC = () => {
     return <EventsList />;
   }
 
-  return <div>{loading && <LoadingAnimation />}</div>;
+  return (
+    <div style={{ opacity: loading ? 0.5 : 1 }}>
+      {loading && <LoadingAnimation />}
+    </div>
+  );
 };
 
 export default EventInfo;

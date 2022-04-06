@@ -1,4 +1,3 @@
-import { CategoryType } from '../../categoryTypes/CategoryType';
 import { UserProfileInfoResponse } from '../../authTypes/responses/UserProfileInfoResponse';
 
 export interface ProfilesState {

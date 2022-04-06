@@ -14,18 +14,16 @@ const DateTimePickerSelect: FC<DateTimePickerSelectProps> = ({
   setDate,
 }) => {
   return (
-    <div>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <DateTimePicker
-          style={{ margin: '0 0 20px 5px' }}
-          clearable
-          disablePast
-          label="Date"
-          value={selectedDate}
-          onChange={setDate}
-        />
-      </MuiPickersUtilsProvider>
-    </div>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <DateTimePicker
+        style={{ margin: '0 0 20px 5px' }}
+        clearable
+        disablePast
+        label="Date"
+        value={selectedDate}
+        onChange={setDate}
+      />
+    </MuiPickersUtilsProvider>
   );
 };
 

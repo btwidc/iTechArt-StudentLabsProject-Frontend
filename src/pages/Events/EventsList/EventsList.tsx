@@ -11,13 +11,14 @@ import LoadingAnimation from '../../../components/LoadingAnimation/LoadingAnimat
 import './EventsList.scss';
 
 const EventsList: FC = () => {
-  const dispatch = useDispatch();
-
   const { loading } = useTypedSelector((state) => state.events);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getEventsListAction());
   }, [dispatch]);
+
   return (
     <div
       className="events-list-container"
