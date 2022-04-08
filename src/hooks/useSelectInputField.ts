@@ -12,7 +12,11 @@ export const useSelectInputField = (
   const [selectedElement, setSelectedElement] = useState<SelectState | null>(
     initialState,
   );
-  return [
+
+  const selectedField: [
+    SelectState | null,
+    (option: SingleValue<SelectType>) => void,
+  ] = [
     selectedElement,
     (option: SingleValue<SelectType>): void => {
       setSelectedElement({
@@ -20,4 +24,6 @@ export const useSelectInputField = (
       });
     },
   ];
+
+  return selectedField;
 };
