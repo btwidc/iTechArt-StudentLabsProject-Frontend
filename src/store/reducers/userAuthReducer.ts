@@ -2,7 +2,7 @@ import {
   UserAuthActionsTypes,
   UserAuthActions,
   UserAuthState,
-} from '../../types/userActionsTypes/userAuthActionsTypes';
+} from '../../types/actionsTypes/userActionsTypes/userAuthActionsTypes';
 
 const initialUserState: UserAuthState = {
   message: '',

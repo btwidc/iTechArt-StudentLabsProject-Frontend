@@ -1,7 +1,7 @@
-import { IUser } from '../authTypes/requests/IUser';
+import { IUser } from '../../authTypes/requests/IUser';
 
-import { AuthResponse } from '../authTypes/responses/AuthResponse';
-import { UserProfileInfoResponse } from '../authTypes/responses/UserProfileInfoResponse';
+import { AuthResponse } from '../../authTypes/responses/AuthResponse';
+import { UserProfileInfoResponse } from '../../authTypes/responses/UserProfileInfoResponse';
 
 export interface UserAuthState {
   message: string;

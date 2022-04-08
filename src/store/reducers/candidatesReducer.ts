@@ -6,7 +6,7 @@ import {
   AddCandidateActions,
   DownloadCandidateCvActions,
   DeleteCandidateActions,
-} from '../../types/candidatesActionsTypes/candidatesActionsTypes';
+} from '../../types/actionsTypes/candidatesActionsTypes/candidatesActionsTypes';
 
 const initialCandidatesState: CandidatesState = {
   message: '',

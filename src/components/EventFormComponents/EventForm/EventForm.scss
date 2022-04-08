@@ -1,0 +1,13 @@
+.events-form-container {
+  width: 100%;
+  height: 100%;
+  padding: 50px 70px;
+
+  @media screen and (max-width: 1080px) {
+    padding: 10px 10px;
+  }
+
+  .event-form-date-select {
+    margin-bottom: 25px;
+  }
+}

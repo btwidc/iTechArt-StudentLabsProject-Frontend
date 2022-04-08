@@ -1,0 +1,11 @@
+.events-form-header-container {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 30px;
+
+  @media screen and (max-width: 1080px) {
+    margin-bottom: 20px;
+  }
+}
+
+

@@ -1,4 +1,5 @@
 export interface UserProfileInfoResponse {
+  id: number;
   name: string;
   surname: string;
   email: string;
