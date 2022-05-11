@@ -1,0 +1,128 @@
+.chat-window {
+  width: 400px;
+  height: 450px;
+  margin: 0 auto;
+
+  .chat-header {
+    height: 50px;
+    border: 2px solid var(--title-color);
+    border-bottom: none;
+    border-radius: 5px;
+    background: var(--button-background-color);
+
+    h3 {
+      padding: 10px 0 0 15px;
+      color: var(--button-text-color);
+      font-size: 24px;
+    }
+  }
+
+  .chat-body {
+    height: 350px;
+    border: 2px solid var(--title-color);
+    border-radius: 3px;
+    background: var(--content-background-color);
+
+    .message-container {
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      .message {
+        height: auto;
+        padding: 10px;
+        display: flex;
+
+        .message-content {
+          width: auto;
+          height: auto;
+          min-height: 40px;
+          max-width: 200px;
+          background-color: #2AA22E;
+          border-radius: 5px;
+          color: white;
+          display: flex;
+          align-items: center;
+          margin: 0 5px;
+          padding: 10px;
+          overflow-wrap: break-word;
+          word-break: break-word;
+        }
+      }
+    }
+  }
+
+  .chat-footer {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    border: 2px solid var(--title-color);
+    border-top: none;
+    border-radius: 3px;
+
+    input {
+      height: 100%;
+      width: 80%;
+      padding: 0 5px;
+      font-size: 1em;
+      outline: none;
+      border: none;
+      border-right: 1px solid var(--title-color);
+    }
+
+    button {
+      height: 100%;
+      width: 20%;
+      border: 0;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-color);
+
+      &:hover {
+        color: var(--button-background-color);
+      }
+    }
+  }
+}
+
+#you {
+  justify-content: flex-start;
+
+  .message-content {
+    justify-content: flex-start;
+  }
+
+  .message-meta {
+    justify-content: flex-start;
+    margin-left: 5px;
+
+    h3{
+      font-size: 14px;
+    }
+  }
+}
+
+#other {
+  justify-content: flex-end;
+
+  .message-content {
+    justify-content: flex-end;
+    background-color: #487FE5;
+  }
+
+  .message-meta {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5px;
+
+    h3{
+      font-size: 14px;
+    }
+
+    .author {
+      margin-left: 10px;
+    }
+  }
+}
+

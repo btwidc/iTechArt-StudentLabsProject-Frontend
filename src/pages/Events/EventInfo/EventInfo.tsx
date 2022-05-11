@@ -6,8 +6,9 @@ import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
 import { getEventAction } from '../../../store/actions/eventsActions';
 
-import EventsList from '../EventsList/EventsList';
 import LoadingAnimation from '../../../components/LoadingAnimation/LoadingAnimation';
+import EventsList from '../EventsList/EventsList';
+import EventInfoHeader from '../../../components/EventInfoComponents/EventInfoHeader/EventInfoHeader';
 import './EventInfo.scss';
 
 const EventInfo: FC = () => {
@@ -28,7 +29,10 @@ const EventInfo: FC = () => {
   }
 
   return (
-    <div style={{ opacity: loading ? 0.5 : 1 }}>
+    <div
+      className="events-info-container"
+      style={{ opacity: loading ? 0.5 : 1 }}>
+      <EventInfoHeader event={event} />
       {loading && <LoadingAnimation />}
     </div>
   );

@@ -3,16 +3,19 @@ import {
   EVENTS_ROUTE,
   NOTES_ROUTE,
   CANDIDATES_ROUTE,
+  CHAT_ROUTE,
 } from './routesPath';
 
 import { CgProfile, CgNotes } from 'react-icons/cg';
 import { MdEvent } from 'react-icons/md';
 import { IoMdPeople } from 'react-icons/io';
+import { HiOutlineChatAlt } from 'react-icons/hi';
 
 import Profile from '../pages/Profile/Profile';
 import EventsList from '../pages/Events/EventsList/EventsList';
 import Notes from '../pages/Notes/Notes';
 import CandidatesList from '../pages/Candidates/CandidatesList/CandidatesList';
+import ChatPage from '../pages/ChatPage/ChatPage';
 
 export const contentRoutes = [
   {
@@ -41,6 +44,13 @@ export const contentRoutes = [
     Component: CandidatesList,
     title: 'Candidates',
     icon: <IoMdPeople />,
+    className: 'nav-item',
+  },
+  {
+    path: CHAT_ROUTE,
+    Component: ChatPage,
+    title: 'Chat',
+    icon: <HiOutlineChatAlt />,
     className: 'nav-item',
   },
 ];
