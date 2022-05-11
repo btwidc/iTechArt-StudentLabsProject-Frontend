@@ -6,7 +6,7 @@ import './ChatPage.scss';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-const socket = io('http://localhost:4000');
+const socket = io('https://student-labs-backend.herokuapp.com/');
 socket.connect();
 
 const ChatPage: FC = () => {
