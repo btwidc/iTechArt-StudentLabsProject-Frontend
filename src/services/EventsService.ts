@@ -2,6 +2,7 @@ import api from '../http/index';
 import { AxiosResponse } from 'axios';
 
 import { EventInfo } from '../types/eventTypes/EventInfo';
+import { EventResponseInfo } from '../types/eventTypes/EventResponse';
 
 export default class EventsService {
   static async getEventsList(): Promise<AxiosResponse<EventInfo[]>> {
@@ -23,6 +24,21 @@ export default class EventsService {
       participantFullName,
       candidateFullName,
       categoryName,
+    });
+  }
+
+  static async getUserEventsResponses(
+    userId: string | undefined,
+  ): Promise<AxiosResponse<EventResponseInfo[]>> {
+    return api.get<EventResponseInfo[]>(`/event/user/${userId}/response`);
+  }
+
+  static async addEventResponse(
+    eventId: string,
+    responseContent: string,
+  ): Promise<AxiosResponse<EventResponseInfo>> {
+    return api.put<EventResponseInfo>(`/event/response/${eventId}`, {
+      responseContent,
     });
   }
 }

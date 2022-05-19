@@ -11,6 +11,7 @@ const initialUserState: UserAuthState = {
   isSetProfileInfo: false,
   loading: false,
   user: null,
+  userId: 0,
   accessToken: '',
   refreshToken: '',
   name: '',
@@ -20,6 +21,7 @@ const initialUserState: UserAuthState = {
   ageExperience: 0,
   department: '',
   summary: '',
+  error: false,
 };
 
 export const userAuthReducer = (
@@ -33,6 +35,7 @@ export const userAuthReducer = (
         isLoggedIn: false,
         loading: true,
         message: 'Login...',
+        error: false,
       };
     case UserAuthActionsTypes.LOGIN_FAILED:
       return {
@@ -40,6 +43,7 @@ export const userAuthReducer = (
         isLoggedIn: false,
         loading: false,
         message: 'Error during login',
+        error: true,
       };
     case UserAuthActionsTypes.LOGIN_SUCCESS:
       return {
@@ -47,6 +51,7 @@ export const userAuthReducer = (
         isLoggedIn: true,
         loading: false,
         message: 'Successfully logged',
+        error: false,
         ...action?.payload,
       };
     case UserAuthActionsTypes.REGISTER_ACTION:
@@ -55,6 +60,7 @@ export const userAuthReducer = (
         isLoggedIn: false,
         loading: true,
         message: 'Register...',
+        error: false,
       };
     case UserAuthActionsTypes.REGISTER_FAILED:
       return {
@@ -62,6 +68,7 @@ export const userAuthReducer = (
         isLoggedIn: false,
         loading: false,
         message: 'Error during register',
+        error: true,
       };
     case UserAuthActionsTypes.REGISTER_SUCCESS:
       return {
@@ -69,6 +76,7 @@ export const userAuthReducer = (
         isLoggedIn: true,
         loading: false,
         message: 'Successfully registered',
+        error: false,
         ...action?.payload,
       };
     case UserAuthActionsTypes.LOGOUT_FAILED:
@@ -77,6 +85,7 @@ export const userAuthReducer = (
         isLoggedIn: true,
         loading: false,
         message: 'Error during logout',
+        error: false,
       };
     case UserAuthActionsTypes.LOGOUT_SUCCESS:
       return {
@@ -85,6 +94,7 @@ export const userAuthReducer = (
         loading: false,
         isSetProfileInfo: false,
         message: 'Successfully logout',
+        error: false,
       };
     case UserAuthActionsTypes.REFRESH_ACTION:
       return {
@@ -93,6 +103,7 @@ export const userAuthReducer = (
         isRefreshing: true,
         loading: true,
         message: 'Refresh...',
+        error: false,
       };
     case UserAuthActionsTypes.REFRESH_FAILED:
       return {
@@ -101,6 +112,7 @@ export const userAuthReducer = (
         isRefreshing: false,
         loading: false,
         message: 'Error during refresh',
+        error: false,
       };
     case UserAuthActionsTypes.REFRESH_SUCCESS:
       return {
@@ -110,6 +122,7 @@ export const userAuthReducer = (
         isSetProfileInfo: true,
         loading: false,
         message: 'Successfully refreshed',
+        error: false,
         ...action?.payload,
       };
     case UserAuthActionsTypes.ADD_PROFILE_INFO_ACTION:

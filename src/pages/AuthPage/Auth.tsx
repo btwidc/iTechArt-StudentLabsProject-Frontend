@@ -17,7 +17,7 @@ const Auth: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const isLoading = useTypedSelector((state) => state.user.loading);
+  const { loading, error } = useTypedSelector((state) => state.user);
 
   const isRegistration = location.pathname === REGISTRATION_ROUTE;
 
@@ -46,13 +46,22 @@ const Auth: FC = () => {
     <div className="auth-page">
       <div
         className="auth-form-container"
-        style={{ opacity: isLoading ? 0.7 : 1 }}>
+        style={{ opacity: loading ? 0.7 : 1 }}>
         <div className="auth-form">
           <form className="auth-form-content">
-            {isLoading && <LoadingAnimation />}
+            {loading && <LoadingAnimation />}
             <span className="auth-form-title">
               {isRegistration ? 'Registration' : 'Login'}
             </span>
+            {error && !isRegistration && (
+              <h3 className="auth-login-error">Invalid email or password</h3>
+            )}
+            {error && isRegistration && (
+              <h3 className="auth-login-error">
+                Fields should contain at least 6 symbols or user with this email
+                already exist
+              </h3>
+            )}
             <Input
               className="auth-form-item"
               labelName="E-mail"
