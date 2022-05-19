@@ -1,0 +1,22 @@
+.event-response-form-container {
+  position: fixed;
+  left: 32%;
+  top: 60%;
+  width: 35%;
+  height: 26%;
+  padding: 15px 20px;
+  background: var(--modal-background-color);
+  border: var(--modal-border);
+  border-radius: 10px;
+  z-index: 3;
+
+  .event-response-form-form-input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .event-response-form-button {
+    width: 100%;
+    height: 30%;
+  }
+}

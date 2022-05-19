@@ -4,6 +4,7 @@ import { AuthResponse } from '../../authTypes/responses/AuthResponse';
 import { UserProfileInfoResponse } from '../../authTypes/responses/UserProfileInfoResponse';
 
 export interface UserAuthState {
+  userId: number;
   message: string;
   loading: boolean;
   isLoggedIn: boolean;
@@ -19,6 +20,7 @@ export interface UserAuthState {
   ageExperience: number;
   department: string;
   summary: string;
+  error: boolean;
 }
 
 export enum UserAuthActionsTypes {
