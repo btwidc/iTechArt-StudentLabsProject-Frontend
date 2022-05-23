@@ -24,6 +24,10 @@ const App: FC = () => {
     return <Auth />;
   }
 
+  if (isLoggedIn && !isSetProfileInfo) {
+    return <ProfileForm />;
+  }
+
   return <MainPage />;
 };
 
