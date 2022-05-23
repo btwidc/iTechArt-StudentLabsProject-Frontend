@@ -153,7 +153,7 @@ export const userAuthReducer = (
     case UserAuthActionsTypes.GET_PROFILE_INFO_ACTION:
       return {
         ...state,
-        isLoggedIn: true,
+        isLoggedIn: false,
         isSetProfileInfo: false,
         loading: true,
         message: 'Getting profile info...',
@@ -161,10 +161,11 @@ export const userAuthReducer = (
     case UserAuthActionsTypes.GET_PROFILE_INFO_FAILED:
       return {
         ...state,
-        isLoggedIn: true,
+        isLoggedIn: false,
         isSetProfileInfo: false,
         loading: false,
         message: 'Error during getting profile info',
+        error: true,
       };
     case UserAuthActionsTypes.GET_PROFILE_INFO_SUCCESS:
       return {
