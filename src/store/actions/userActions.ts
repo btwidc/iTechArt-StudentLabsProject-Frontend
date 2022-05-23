@@ -32,13 +32,12 @@ export const loginAuthAction = (formState: IUserAuth) => {
         payload: isSetProfile.data,
       });
     } catch (e: any) {
-      if (e.response.status === 400) {
-        dispatch({
-          type: UserAuthActionsTypes.GET_PROFILE_INFO_FAILED,
-        });
-      } else {
+      if (e.response.status === 400 || e.response.status === 404) {
         dispatch({
           type: UserAuthActionsTypes.LOGIN_FAILED,
+        });
+        dispatch({
+          type: UserAuthActionsTypes.GET_PROFILE_INFO_FAILED,
         });
       }
     }
